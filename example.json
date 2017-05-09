@@ -1,0 +1,21 @@
+{
+    "_id": "c-35",
+    "_parentId":"b-20",
+    "_type":"component",
+    "_classes": "",
+    "_layout": "full",
+    "_component": "azure",
+    "title": "Karle pyar karle",
+    "displayTitle": "Karle pyar karle",
+    "body": "The legendary Asha Bosle&hellip;",
+    "instruction":"",
+    "_setCompletionOn": "play",
+    "_media": {
+        "_source": "//ampdemo.azureedge.net/azuremediaplayer_embed.html?url=http://ms01.streaming.mediaservices.windows.net/641264a2-4086-4977-8fb7-8d80ba9eb201/FeaturesVer3-Supervisors_2.ism/manifest",
+        "_aspectRatio": 1.33,
+        "_autoplay": false,
+    },
+    "_pageLevelProgress": {
+        "_isEnabled": true
+    }
+},

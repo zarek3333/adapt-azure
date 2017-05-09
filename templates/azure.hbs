@@ -1,0 +1,17 @@
+<div class="azure-inner component-inner" role="region" aria-label="{{_accessibility._ariaRegions.media}}">
+	{{> component this}}
+	<div class="azure-widget component-widget">
+		<iframe width="640px" height="360px" scrolling="no" style="width:100%;" src="{{_media._source}}?&autoplay={{#if _media._autoplay}}true{{else}}false{{/if}}" frameborder="0" {{#if _media._allowFullscreen}}allowfullscreen{{/if}}></iframe>
+		{{#if _media.transcriptLink}}
+	    <div class="azure-transcript-container" role="document">
+	      <a href="{{_media.transcriptLink}}" target="_blank" class="media-transcript">
+	        {{#if _media.transcriptText}}
+	          {{_media.transcriptText}}
+	        {{else}}
+	          {{_media.transcriptLink}}
+	        {{/if}}
+	      </a>
+	    </div>
+	    {{/if}}
+	</div>
+</div>

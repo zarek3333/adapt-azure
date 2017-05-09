@@ -1,0 +1,83 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "$ref": "http://localhost/plugins/content/component/model.schema",
+  "globals": {
+    "ariaRegion": {
+      "type": "string",
+      "required": true,
+      "default": "This is a media component which displays a Azure video. Select the play / pause button to watch it.",
+      "inputType": "Text",
+      "validators": []
+    },
+    "transcriptButton": {
+      "type": "string",
+      "required": false,
+      "default": "Alternatively you can select the link below for the transcript.",
+      "inputType": "Text",
+      "validators": []
+    }
+  },
+  "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text"
+    },
+    "_setCompletionOn": {
+      "type":"string",
+      "required":true,
+      "enum": ["inview", "play", "ended"],
+      "default": "inview",
+      "title": "Set completion of Video on",
+      "inputType": {"type": "Select", "options":["inview", "play", "ended"]},
+      "validators": ["required"],
+      "help": "This tells Adapt when to set this video to complete"
+    },
+    "_media": {
+      "type":"object",
+      "required":true,
+      "title": "Media settings",
+      "properties":{
+        "_source": {
+          "type":"string",
+          "required":true,
+          "default": "//ampdemo.azureedge.net/azuremediaplayer_embed.html?url=http://ms01.streaming.mediaservices.windows.net/641264a2-4086-4977-8fb7-8d80ba9eb201/FeaturesVer3-Supervisors_2.ism/manifest",
+          "title": "Source URL",
+          "inputType": "Text",
+          "validators": [],
+          "help": "The 'embed' URL of the Azure video you want to be displayed"
+        },
+        "_aspectRatio": {
+          "type":"number",
+          "required":false,
+          "default": "1.778",
+          "title": "Aspect ratio",
+          "inputType": "Text",
+          "validators": [],
+          "help": "The aspect ratio of the video as a decimal number. If the aspect ratio is 16:9 then you calculate the decimal version by dividing 16 by 9 i.e. 1.778. 4:3 aspect ratio is 1.33"
+        },
+        "_autoplay": {
+          "type":"boolean",
+          "required":false,
+          "default": "false",
+          "title": "Autoplay",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": [],
+          "help": "Specifies whether or not the video will automatically start to play when the player loads (not supported on iOS)."
+        }
+      }
+    }
+  }
+}

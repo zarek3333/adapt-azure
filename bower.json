@@ -1,0 +1,19 @@
+{
+    "name": "adapt-azure",
+    "repository": "git://github.com/mike-st/adapt-azure.git",
+    "framework": "^2.0.0",
+    "version": "1.0.1",
+    "homepage": "https://github.com/mike-st/adapt-azure",
+    "displayName": "Azure Player",
+    "component": "azure",
+    "authors": [
+        "Mike Stevens <mesgraphix@gmail.com>"
+    ],
+    "description": "Azure Player for Adapt",
+    "main": "/js/adapt-azure.js",
+    "keywords": [
+        "adapt-plugin",
+        "adapt-component"
+    ],
+    "license": "GPLv3"
+}
