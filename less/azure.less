@@ -1,4 +1,5 @@
 .azure-component {
+  text-align:center;
   .azure-transcript {
     padding: @button-padding;
     display: block;
@@ -10,4 +11,23 @@
       background-color: @button-hover-color;
     }
   }
+}
+
+.vjs-big-play-button {
+    position: relative !important;
+    text-align: center !important;
+    margin-left: 50%;
+    left: -2em !important;
+    margin-top: 25%;
+    top: -1.3em !important;
+}
+
+@media (max-height: 750px) and (min-height: 499px) {
+  .azure-component.component-full .azure-inner {margin-top: 15px;}
+  .azure-component.component-full .azure-widget #vidazure {width: 924px !important; height: 520px !important; text-align: center; display: inline-block;}
+}
+
+@media only screen and (max-width: 420px)  {
+  .azure-component.component-full .azure-inner {margin-top: inherit;}
+  .azure-component.component-full .azure-widget #vidazure {width: 100% !important; height: 162px !important;}
 }
