@@ -11,6 +11,9 @@
     ],
     "description": "Azure Player for Adapt",
     "main": "/js/adapt-azure.js",
+    "assetFields": [
+        "_media[]._poster"
+    ],
     "keywords": [
         "adapt-plugin",
         "adapt-component"
