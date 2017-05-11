@@ -53,7 +53,7 @@
         "_source": {
           "type":"string",
           "required":true,
-          "default": "//ampdemo.azureedge.net/azuremediaplayer_embed.html?url=http://ms01.streaming.mediaservices.windows.net/641264a2-4086-4977-8fb7-8d80ba9eb201/FeaturesVer3-Supervisors_2.ism/manifest",
+          "default": "https://ms01.streaming.mediaservices.windows.net/641264a2-4086-4977-8fb7-8d80ba9eb201/FeaturesVer3-Supervisors_2.ism/manifest",
           "title": "Source URL",
           "inputType": "Text",
           "validators": [],
@@ -67,6 +67,23 @@
           "inputType": "Text",
           "validators": [],
           "help": "The aspect ratio of the video as a decimal number. If the aspect ratio is 16:9 then you calculate the decimal version by dividing 16 by 9 i.e. 1.778. 4:3 aspect ratio is 1.33"
+        },
+        "_poster": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "inputType": "Asset:image",
+            "validators": ["required"],
+            "help": "This is where the poster image path is placed."
+        },
+        "_controls": {
+          "type":"boolean",
+          "required":false,
+          "default": "true",
+          "title": "Show Controls",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": [],
+          "help": "Do you wish to show controls or not."
         },
         "_autoplay": {
           "type":"boolean",
