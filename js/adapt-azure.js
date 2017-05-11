@@ -20,6 +20,27 @@ define(function(require) {
 
             _.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
 
+            /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
+            /* $( "script#azurejs" ).remove();
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.id = "azurejs";
+            s.src = "https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js";
+            $("head").append(s); */
+
+            /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
+            $( "link#azurecss" ).remove();
+            var l = document.createElement("link");
+            l.rel = "stylesheet";
+            l.id = "azurecss";
+            l.href = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
+            $("head").append(l);
+
+            $(".azure-widget").click(function(){
+                $( ".vjs-playing" ).trigger( "click" );
+                //$( "#vidazure" ).removeClass("vjs-playing").addClass("vjs-paused");
+            });
+
             if (window.onYouTubeIframeAPIReady === undefined) {
                 window.onYouTubeIframeAPIReady = function() {
                     console.info('YouTube iframe API loaded');
@@ -36,11 +57,11 @@ define(function(require) {
         },
 
         setIFrameSize: function () {
-            this.$('iframe').width(this.$('.azure-widget').width());
+            this.$('#vidazure').width(this.$('.azure-widget').width());
             
             var aspectRatio = (this.model.get("_media")._aspectRatio ? parseFloat(this.model.get("_media")._aspectRatio) : 1.778);//default to 16:9 if not specified
             if (!isNaN(aspectRatio)) {
-                this.$('iframe').height(this.$('.azure-widget').width() / aspectRatio);
+                this.$('#vidazure').height(this.$('.azure-widget').width() / aspectRatio);
             }
         },
 
@@ -91,12 +112,20 @@ define(function(require) {
 
         onYouTubeIframeAPIReady: function() {
             //console.info('onYouTubeIframeAPIReady');
-	    this.player = new YT.Player(this.$('iframe').get(0), {
+        /* this.player = new YT.Player(this.$('#vidazure').get(0), {
                 events: {
                     'onStateChange': this.onPlayerStateChange,
                     'onReady': this.onPlayerReady
                 }
-            });
+            }); */
+
+            _.delay(function() {
+                $(window).resize();
+            }, 250);
+
+            this.onPlayerStateChange;
+
+            this.onPlayerReady;
 
             this.isPlaying = false;
             
