@@ -59,15 +59,19 @@ define(function(require) {
         postRender: function() {
 
             /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
+            $( "script#azurejs" ).remove();
             var script = "https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js";
             var s = document.createElement('script');
+            s.id = "azurejs";
             s.src = script;
             document.body.appendChild(s);
 
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
+            $( "link#azurecss" ).remove();
             var link = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
             var l = document.createElement('link');
             l.rel = "stylesheet";
+            l.id = "azurecss";
             l.href = link;
             document.body.appendChild(l);
 
