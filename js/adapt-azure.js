@@ -21,20 +21,9 @@ define(function(require) {
             _.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
 
             /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
-            /* $( "script#azurejs" ).remove();
-            var s = document.createElement("script");
-            s.type = "text/javascript";
-            s.id = "azurejs";
-            s.src = "https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js";
-            $("head").append(s); */
-
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
-            $( "link#azurecss" ).remove();
-            var l = document.createElement("link");
-            l.rel = "stylesheet";
-            l.id = "azurecss";
-            l.href = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
-            $("head").append(l);
+            $( "<link rel='stylesheet' href='https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css'><script src='https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js'></script>" ).appendTo( ".nth-child-1 .azure-title .azure-title-inner" );
+
 
             $(".azure-widget").click(function(){
                 $( ".vjs-playing" ).trigger( "click" );
