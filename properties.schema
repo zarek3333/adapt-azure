@@ -53,7 +53,7 @@
         "_source": {
           "type":"string",
           "required":true,
-          "default": "https://ms01.streaming.mediaservices.windows.net/641264a2-4086-4977-8fb7-8d80ba9eb201/FeaturesVer3-Supervisors_2.ism/manifest",
+          "default": "https://onyxmediacdn-onyxmedia.streaming.mediaservices.windows.net/10bd6932-0b13-4eef-988f-5698603b3e11/create-windows-server-virtual-machine.ism/manifest",
           "title": "Source URL",
           "inputType": "Text",
           "validators": [],
