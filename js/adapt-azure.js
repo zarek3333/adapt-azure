@@ -20,17 +20,7 @@ define(function(require) {
 
             _.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
 
-            /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
-            $( "link#azurecss" ).remove();
-            var l = document.createElement("link");
-            l.rel = "stylesheet";
-            l.id = "azurecss";
-            l.href = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
-            $("head").append(l);
-
             /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
-            $( "<script src='https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js'></script>" ).appendTo( ".nth-child-1 .azure-title .azure-title-inner" );
-
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-playing vjs-has-started vjs-user-inactive
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-has-started vjs-paused vjs-ended vjs-user-inactive
 
@@ -67,6 +57,20 @@ define(function(require) {
         },
 
         postRender: function() {
+
+            /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
+            var script = "https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js";
+            var s = document.createElement('script');
+            s.src = script;
+            document.body.appendChild(s);
+
+            /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
+            var link = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
+            var l = document.createElement('link');
+            l.rel = "stylesheet";
+            l.href = link;
+            document.body.appendChild(l);
+
             //FOR HTML/HBS Paramenters: https://developers.google.com/youtube/player_parameters
             if (Adapt.youTubeIframeAPIReady === true) {
                 this.onYouTubeIframeAPIReady();
