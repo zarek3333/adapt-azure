@@ -20,14 +20,26 @@ define(function(require) {
 
             _.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
 
-            /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
-            $( "<link rel='stylesheet' href='https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css'><script src='https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js'></script>" ).appendTo( ".nth-child-1 .azure-title .azure-title-inner" );
+            $( "link#azurecss" ).remove();
+            var l = document.createElement("link");
+            l.rel = "stylesheet";
+            l.id = "azurecss";
+            l.href = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
+            $("head").append(l);
 
-
+            /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
+            $( "<script src='https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js'></script>" ).appendTo( ".nth-child-1 .azure-title .azure-title-inner" );
 
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-playing vjs-has-started vjs-user-inactive
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-has-started vjs-paused vjs-ended vjs-user-inactive
+
+            $('.block').mousemove( function(){
+                if ( $('#vidazure').hasClass('vjs-ended') ) {
+                    //this.setCompletionStatus();
+                    alert('ended');
+                }
+            });
 
 
             if (window.onYouTubeIframeAPIReady === undefined) {
