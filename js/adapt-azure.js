@@ -25,10 +25,10 @@ define(function(require) {
             $( "<link rel='stylesheet' href='https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css'><script src='https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js'></script>" ).appendTo( ".nth-child-1 .azure-title .azure-title-inner" );
 
 
-            $(".azure-widget").click(function(){
-                $( ".vjs-playing" ).trigger( "click" );
-                //$( "#vidazure" ).removeClass("vjs-playing").addClass("vjs-paused");
-            });
+
+             //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-playing vjs-has-started vjs-user-inactive
+             //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-has-started vjs-paused vjs-ended vjs-user-inactive
+
 
             if (window.onYouTubeIframeAPIReady === undefined) {
                 window.onYouTubeIframeAPIReady = function() {
