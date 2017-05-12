@@ -34,12 +34,12 @@ define(function(require) {
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-playing vjs-has-started vjs-user-inactive
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-has-started vjs-paused vjs-ended vjs-user-inactive
 
-            $('.block').mousemove( function(){
+            /* $('.block').mousemove( function(){
                 if ( $('#vidazure').hasClass('vjs-ended') ) {
                     //this.setCompletionStatus();
                     alert('ended');
                 }
-            });
+            }); */
 
 
             if (window.onYouTubeIframeAPIReady === undefined) {
