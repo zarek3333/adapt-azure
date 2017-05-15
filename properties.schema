@@ -53,7 +53,7 @@
         "javascript": {
           "type": "string",
           "required": false,
-          "default": "<script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>",
+          "default": "<script src=\"https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js\"></script>",
           "title": "REQUIRED JAVASCRIPT FOR AZURE: ADD ONCE ONLY",
           "inputType": "Text",
           "validators": [],
