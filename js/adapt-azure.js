@@ -58,13 +58,14 @@ define(function(require) {
 
         postRender: function() {
 
+            //CODE BELOW NEEDS BE ADDED INTO THE THEME FOR THIS TO WORK
             /* JAVASCRIPT FOR AZURE PLAYER <script id="azurejs" src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
-            $( "script#azurejs" ).remove();
-            $( "head" ).append("<script id=\"azurejs\" src=\"https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js\"></script>");
+            //$( "script#azurejs" ).remove();
+            //$( "head" ).append("<script id=\"azurejs\" src=\"https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js\"></script>");
 
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
-            $( "link#azurecss" ).remove();
-            $( "head" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css\">");
+            //$( "link#azurecss" ).remove();
+            //$( "head" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css\">");
 
 
             //FOR HTML/HBS Paramenters: https://developers.google.com/youtube/player_parameters
