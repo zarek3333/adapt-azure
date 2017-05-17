@@ -1,12 +1,13 @@
 /*
 * adapt-azure
 * License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Oliver Foster <oliver.foster@kineo.com>, Matt Leathes <matt.leathes@kineo.com>
+* Maintainers - Mike Stevens <mesgraphix@gmail.com>
 */
-define(function(require) {
-
-    var ComponentView = require('coreViews/componentView');
-    var Adapt = require('coreJS/adapt');
+define([
+    'core/js/adapt',
+    'core/js/views/componentView',
+    'libraries/azuremediaplayer.min'
+], function(Adapt, ComponentView) {
 
     var azure = ComponentView.extend({
         defaults:function() {
