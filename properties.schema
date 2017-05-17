@@ -54,10 +54,10 @@
           "type": "string",
           "required": false,
           "default": "<script src=\"https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js\"></script>",
-          "title": "REQUIRED JAVASCRIPT FOR AZURE: ADD ONCE ONLY PER CHAPTER",
+          "title": "REQUIRED JAVASCRIPT FOR AZURE: ADD ONCE ONLY PER PAGE OR CHAPTER",
           "inputType": "Text",
           "validators": [],
-          "help": "Add this javascript tag to ONLY 1 of the component instructions field for the entire CHAPTER"
+          "help": "Add this javascript tag to ONLY 1 of the azure components instructions field for the entire PAGE or CHAPTER in the course"
         },
         "_source": {
           "type":"string",
