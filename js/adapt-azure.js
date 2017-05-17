@@ -58,22 +58,14 @@ define(function(require) {
 
         postRender: function() {
 
-            /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
-            //$( "script#azurejs" ).remove();
-            /* var script = "https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js";
-            var s = document.createElement('script');
-            s.id = "azurejs";
-            s.src = script;
-            document.body.appendChild(s); */
+            /* JAVASCRIPT FOR AZURE PLAYER <script id="azurejs" src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
+            $( "script#azurejs" ).remove();
+            $( "head" ).append("<script id=\"azurejs\" src=\"https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js\"></script>");
 
-            /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
+            /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css"> */
             $( "link#azurecss" ).remove();
-            var link = "https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css";
-            var l = document.createElement('link');
-            l.rel = "stylesheet";
-            l.id = "azurecss";
-            l.href = link;
-            document.body.appendChild(l);
+            $( "head" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"https://amp.azure.net/libs/amp/1.7.4/skins/amp-default/azuremediaplayer.min.css\">");
+
 
             //FOR HTML/HBS Paramenters: https://developers.google.com/youtube/player_parameters
             if (Adapt.youTubeIframeAPIReady === true) {
@@ -130,7 +122,7 @@ define(function(require) {
 
             _.delay(function() {
                 $(window).resize();
-            }, 250);
+            }, 10);
 
             this.onPlayerStateChange;
 
