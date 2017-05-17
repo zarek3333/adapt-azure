@@ -62,11 +62,11 @@
         "_source": {
           "type":"string",
           "required":true,
-          "default": "https://onyxmediacdn-onyxmedia.streaming.mediaservices.windows.net/10bd6932-0b13-4eef-988f-5698603b3e11/create-windows-server-virtual-machine.ism/manifest",
-          "title": "Source URL",
+          "default": "onyxmediacdn-onyxmedia.streaming.mediaservices.windows.net/10bd6932-0b13-4eef-988f-5698603b3e11/create-windows-server-virtual-machine.ism/manifest",
+          "title": "Source URL (DON'T INCLUDE HTTP OR HTTPS)",
           "inputType": "Text",
           "validators": [],
-          "help": "The 'embed' URL of the Azure video you want to be displayed"
+          "help": "The 'embed' URL of the Azure video you want to be displayed (DON'T INCLUDE HTTP OR HTTPS)"
         },
         "_aspectRatio": {
           "type":"number",
