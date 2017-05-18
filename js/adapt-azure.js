@@ -3,11 +3,12 @@
 * License - http://github.com/adaptlearning/adapt_framework/LICENSE
 * Maintainers - Mike Stevens <mesgraphix@gmail.com>
 */
-define([
-    'core/js/adapt',
-    'core/js/views/componentView',
-    'libraries/azuremediaplayer.min'
-], function(Adapt, ComponentView) {
+
+define(function(require) {
+
+    var ComponentView = require('coreViews/componentView');
+    var Adapt = require('coreJS/adapt');
+    var azuremediaplayer  = $.getScript('//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js');
 
     var azure = ComponentView.extend({
         defaults:function() {
@@ -20,6 +21,10 @@ define([
             ComponentView.prototype.initialize.apply(this);
 
             _.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
+
+            /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
+            $( "link#azurecss" ).remove();
+            $( "body" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css\">");
 
             /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
              //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-playing vjs-has-started vjs-user-inactive
@@ -35,7 +40,7 @@ define([
 
             if (window.onYouTubeIframeAPIReady === undefined) {
                 window.onYouTubeIframeAPIReady = function() {
-                    console.info('YouTube iframe API loaded');
+                    //console.info('YouTube iframe API loaded');
                     Adapt.youTubeIframeAPIReady = true;
                     Adapt.trigger('youTubeIframeAPIReady');
                 };
@@ -58,16 +63,6 @@ define([
         },
 
         postRender: function() {
-
-            //ADD THE MIN.JS AND MIN.CSS TO THE THEME TO GET IT TO WORK
-            /* JAVASCRIPT FOR AZURE PLAYER <script id="azurejs" src="https://amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
-            //$( "script#azurejs" ).remove();
-            //$( "head" ).append("<script id=\"azurejs\" src=\"https://amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js\"></script>");
-
-            /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="https://amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
-            //$( "link#azurecss" ).remove();
-            //$( "head" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"https://amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css\">");
-
 
             //FOR HTML/HBS Paramenters: https://developers.google.com/youtube/player_parameters
             if (Adapt.youTubeIframeAPIReady === true) {
@@ -124,7 +119,7 @@ define([
 
             _.delay(function() {
                 $(window).resize();
-            }, 10);
+            }, 250);
 
             this.onPlayerStateChange;
 
