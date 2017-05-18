@@ -8,7 +8,7 @@ define(function(require) {
 
     var ComponentView = require('coreViews/componentView');
     var Adapt = require('coreJS/adapt');
-    var azuremediaplayer  = $.getScript('//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js');
+    //var azuremediaplayer  = $.getScript('//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js');
 
     var azure = ComponentView.extend({
         defaults:function() {
