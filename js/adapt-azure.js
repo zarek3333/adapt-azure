@@ -49,7 +49,7 @@ define(function(require) {
                     Adapt.youTubeIframeAPIReady = true;
                     Adapt.trigger('youTubeIframeAPIReady');
                 };
-                $.getScript('//www.youtube.com/iframe_api');
+                $.getScript('//rawgit.com/mike-st/adapt-azure/master/js/www-widgetapi.js');
             }
         },
 
