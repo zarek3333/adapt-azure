@@ -45,9 +45,8 @@ define(function(require) {
 
             if (window.onYouTubeIframeAPIReady === undefined) {
                 window.onYouTubeIframeAPIReady = function() {
-                    //console.info('YouTube iframe API loaded');
-                    Adapt.youTubeIframeAPIReady = true;
-                    Adapt.trigger('youTubeIframeAPIReady');
+                    Adapt.azureAPIReady = true;
+                    Adapt.trigger('azureAPIReady');
                 };
                 $.getScript('//rawgit.com/mike-st/adapt-azure/master/js/www-widgetapi.js');
             }
@@ -69,11 +68,10 @@ define(function(require) {
 
         postRender: function() {
 
-            //FOR HTML/HBS Paramenters: https://developers.google.com/youtube/player_parameters
-            if (Adapt.youTubeIframeAPIReady === true) {
+            if (Adapt.azureAPIReady === true) {
                 this.onYouTubeIframeAPIReady();
             } else {
-                Adapt.once('youTubeIframeAPIReady', this.onYouTubeIframeAPIReady, this)
+                Adapt.once('azureAPIReady', this.onYouTubeIframeAPIReady, this)
             }
         },
 
@@ -90,9 +88,6 @@ define(function(require) {
             if (this.completionEvent === "inview") {
                 this.$('.azure-widget').on('inview', this.onInview);
             }
-
-            // add listener for other youtube components on the page, so that we can prevent multiple video playback
-            this.listenTo(Adapt, 'adapt-azure:playbackstart', this.onYouTubePlaybackStart);
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
@@ -114,13 +109,6 @@ define(function(require) {
         },
 
         onYouTubeIframeAPIReady: function() {
-            //console.info('onYouTubeIframeAPIReady');
-        /* this.player = new YT.Player(this.$('#vidazure').get(0), {
-                events: {
-                    'onStateChange': this.onPlayerStateChange,
-                    'onReady': this.onPlayerReady
-                }
-            }); */
 
             _.delay(function() {
                 $(window).resize();
@@ -139,30 +127,12 @@ define(function(require) {
             this.setIFrameSize();
         },
 
-        /**
-        * if another YouTube video starts playback whilst this one is playing, pause this one.
-        * prevents user from playing multiple videos on the page at the same time
-        */
-        onYouTubePlaybackStart: function(component) {
-            if(component != this && this.isPlaying) {
-                this.player.pauseVideo();
-            }
-        },
-
         onPlayerReady: function() {
             if (this.model.get("_media")._playbackQuality) {
                 this.player.setPlaybackQuality(this.model.get("_media")._playbackQuality);
             }
         },
 
-        /**
-        * this seems to have issues in Chrome if the user is logged into YouTube (possibly any Google account) - the API just doesn't broadcast the events
-        * but instead throws the error:
-        * Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://www.youtube.com') does not match the recipient window's origin ('http://www.youtube.com').
-        * This is documented here:
-        *   https://code.google.com/p/gdata-issues/issues/detail?id=5788
-        * but I haven't managed to get any of the workarounds to work... :-(
-        */
         onPlayerStateChange: function(event) {
             switch(event.data) {
                 case YT.PlayerState.PLAYING:
