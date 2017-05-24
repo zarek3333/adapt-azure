@@ -26,16 +26,21 @@ define(function(require) {
             $( "link#azurecss" ).remove();
             $( "body" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css\">");
 
-            /* JAVASCRIPT FOR AZURE PLAYER <script src="https://amp.azure.net/libs/amp/1.7.4/azuremediaplayer.min.js"></script>*/
-             //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-playing vjs-has-started vjs-user-inactive
-             //azuremediaplayer amp-default-skin vjs-controls-enabled vjs-has-started vjs-paused vjs-ended vjs-user-inactive
-
-            /* $('.block').mousemove( function(){
-                if ( $('#vidazure').hasClass('vjs-ended') ) {
+            /* JAVASCRIPT FOR AZURE PLAYER <script src="//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
+            $('.block').mousemove( function(){
+                if ( $('.azuremediaplayer').hasClass('vjs-user-active') && $('.azuremediaplayer').hasClass('vjs-playing')) {
                     //this.setCompletionStatus();
-                    alert('ended');
+                    $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
-            }); */
+            });
+            //MOBILE TABLET VERSION
+            $('.block').bind('touchmove', function (e){
+                if ( $('.azuremediaplayer').hasClass('vjs-user-active') && $('.azuremediaplayer').hasClass('vjs-playing')) {
+                    //this.setCompletionStatus();
+                    $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
+                }
+            });
+
 
 
             if (window.onYouTubeIframeAPIReady === undefined) {
@@ -87,7 +92,7 @@ define(function(require) {
             }
 
             // add listener for other youtube components on the page, so that we can prevent multiple video playback
-            this.listenTo(Adapt, 'adapt-azure:playbackstart', this.onYouTubePlaybackStart)
+            this.listenTo(Adapt, 'adapt-azure:playbackstart', this.onYouTubePlaybackStart);
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
@@ -189,3 +194,4 @@ define(function(require) {
 
     return azure;
 });
+
