@@ -20,7 +20,8 @@ define(function(require) {
         initialize: function() {
             ComponentView.prototype.initialize.apply(this);
 
-            _.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
+            //_.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
+            _.bindAll(this, 'onPlayerReady', 'onInview');
 
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
             $( "link#azurecss" ).remove();
@@ -60,11 +61,11 @@ define(function(require) {
         },
 
         setIFrameSize: function () {
-            this.$('#vidazure').width(this.$('.azure-widget').width());
+            this.$('.amp-default-skin').width(this.$('.azure-widget').width());
             
             var aspectRatio = (this.model.get("_media")._aspectRatio ? parseFloat(this.model.get("_media")._aspectRatio) : 1.778);//default to 16:9 if not specified
             if (!isNaN(aspectRatio)) {
-                this.$('#vidazure').height(this.$('.azure-widget').width() / aspectRatio);
+                this.$('.amp-default-skin').height(this.$('.azure-widget').width() / aspectRatio);
             }
         },
 
@@ -89,7 +90,17 @@ define(function(require) {
             this.completionEvent = (!this.model.get('_setCompletionOn')) ? 'play' : this.model.get('_setCompletionOn');
             if (this.completionEvent === "inview") {
                 this.$('.azure-widget').on('inview', this.onInview);
-            };
+            }
+
+            // IF Video is set to ended
+            if (this.completionEvent === "ended") {
+                this.$('.azure-widget').addClass('isended');
+                $('.isended').mousemove( function(){
+                    if ( $('.vjs-user-active').hasClass('vjs-ended')) {
+                        //alert("video has ended!");
+                    }
+                });
+            }
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
@@ -116,8 +127,6 @@ define(function(require) {
                 $(window).resize();
             }, 250);
 
-            this.onPlayerStateChange;
-
             this.onPlayerReady;
 
             this.isPlaying = false;
@@ -133,30 +142,8 @@ define(function(require) {
             if (this.model.get("_media")._playbackQuality) {
                 this.player.setPlaybackQuality(this.model.get("_media")._playbackQuality);
             }
-        },
-
-        onPlayerStateChange: function(event) {
-            switch(event.data) {
-                case YT.PlayerState.PLAYING:
-                    Adapt.trigger('adapt-azure:playbackstart', this);
-                    
-                    this.isPlaying = true;
-
-                    if(this.model.get('_setCompletionOn') && this.model.get('_setCompletionOn') === "play") {
-                        this.setCompletionStatus();
-                    }
-                break;
-                case YT.PlayerState.PAUSED:
-                    this.isPlaying = false;
-                break;
-                case YT.PlayerState.ENDED:
-                    if(this.model.get('_setCompletionOn') && this.model.get('_setCompletionOn') === "ended") {
-                        this.setCompletionStatus();
-                    }
-                break;
-            }
-            //console.log("this.onPlayerStateChange: " + this.isPlaying);
         }
+
     },
     {
         template: 'azure'
