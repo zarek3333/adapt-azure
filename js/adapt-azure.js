@@ -28,16 +28,20 @@ define(function(require) {
 
             /* JAVASCRIPT FOR AZURE PLAYER <script src="//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
             $('.block').mousemove( function(){
-                if ( $('.azuremediaplayer').hasClass('vjs-user-active') && $('.azuremediaplayer').hasClass('vjs-playing')) {
+                if ( $('.azuremediaplayer').hasClass('vjs-user-active')) {
                     $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
             });
             //MOBILE TABLET VERSION
             $('.block').bind('touchmove', function (e){
-                if ( $('.azuremediaplayer').hasClass('vjs-user-active') && $('.azuremediaplayer').hasClass('vjs-playing')) {
+                if ( $('.azuremediaplayer').hasClass('vjs-user-active')) {
                     $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
             });
+
+            /* $(".azure-widget").mouseover( function(){
+                alert('hello');
+            }); */
 
 
 
@@ -151,7 +155,7 @@ define(function(require) {
                     }
                 break;
             }
-            console.log("this.onPlayerStateChange: " + this.isPlaying);
+            //console.log("this.onPlayerStateChange: " + this.isPlaying);
         }
     },
     {
