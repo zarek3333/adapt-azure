@@ -72,6 +72,7 @@
             "type": "string",
             "required": false,
             "default": "",
+            "title": "Poster Image (1260 x 709px)",
             "inputType": "Asset:image",
             "validators": ["required"],
             "help": "This is where the poster image path is placed."
