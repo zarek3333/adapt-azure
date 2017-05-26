@@ -20,8 +20,7 @@ define(function(require) {
         initialize: function() {
             ComponentView.prototype.initialize.apply(this);
 
-            //_.bindAll(this, 'onPlayerStateChange', 'onPlayerReady', 'onInview');
-            _.bindAll(this, 'onPlayerReady', 'onInview');
+            _.bindAll(this, 'onPlayerReady', 'onInview', 'onEnded');
 
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
             $( "link#azurecss" ).remove();
@@ -39,12 +38,6 @@ define(function(require) {
                     $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
             });
-
-            /* $(".azure-widget").mouseover( function(){
-                alert('hello');
-            }); */
-
-
 
             if (window.onYouTubeIframeAPIReady === undefined) {
                 window.onYouTubeIframeAPIReady = function() {
@@ -90,16 +83,8 @@ define(function(require) {
             this.completionEvent = (!this.model.get('_setCompletionOn')) ? 'play' : this.model.get('_setCompletionOn');
             if (this.completionEvent === "inview") {
                 this.$('.azure-widget').on('inview', this.onInview);
-            }
-
-            // IF Video is set to ended
-            if (this.completionEvent === "ended") {
-                this.$('.azure-widget').addClass('isended');
-                $('.isended').mousemove( function(){
-                    if ( $('.vjs-user-active').hasClass('vjs-ended')) {
-                        //alert("video has ended!");
-                    }
-                });
+            } else if (this.completionEvent === "ended") {
+                this.$('.azure-widget').on('inview', this.onEnded);
             }
         },
 
@@ -116,6 +101,15 @@ define(function(require) {
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     this.$('.component-inner').off('inview');
+                    this.setCompletionStatus();
+                }
+            }
+        },
+        
+        onEnded: function(event, visible) {
+            if (visible) {
+                if ( $('.vjs-has-started').hasClass('vjs-ended')) {
+                    this.$('.vjs-has-started.vjs-ended').off('inview');
                     this.setCompletionStatus();
                 }
             }
