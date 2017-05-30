@@ -20,7 +20,7 @@ define(function(require) {
         initialize: function() {
             ComponentView.prototype.initialize.apply(this);
 
-            _.bindAll(this, 'onPlayerReady', 'onInview', 'onEnded');
+            _.bindAll(this, 'onPlayerReady', 'onInview', 'onEnded' );
 
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
             $( "link#azurecss" ).remove();
@@ -28,12 +28,14 @@ define(function(require) {
 
             /* JAVASCRIPT FOR AZURE PLAYER <script src="//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
             $('.block').mousemove( function(){
+                $('.vjs-has-started.vjs-playing.vjs-user-active').addClass('azurend');
                 if ( $('.azuremediaplayer').hasClass('vjs-user-active')) {
                     $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
             });
             //MOBILE TABLET VERSION
             $('.block').bind('touchmove', function (e){
+                 $('.vjs-has-started.vjs-playing.vjs-user-active').addClass('azurend');
                 if ( $('.azuremediaplayer').hasClass('vjs-user-active')) {
                     $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
@@ -106,11 +108,24 @@ define(function(require) {
             }
         },
         
-        onEnded: function(event, visible) {
-            if (visible) {
-                if ( $('.vjs-has-started').hasClass('vjs-ended')) {
-                    this.$('.vjs-has-started.vjs-ended').off('inview');
-                    this.setCompletionStatus();
+        onEnded: function(event, visible2, visiblePartX2, visiblePartY2) {
+            if (visible2) {
+                if (visiblePartY2 === 'top') {
+                    this._isVisibleTop = true;
+
+                } else if (visiblePartY2 === 'bottom') {
+                    this._isVisibleBottom = true;
+                } else {
+                    this._isVisibleTop = true;
+                    this._isVisibleBottom = true;
+                }
+
+                if (this._isVisibleTop && this._isVisibleBottom) {
+                    if ( $('.azuremediaplayer').hasClass('azurend')) {
+                        this.$('.component-inner').off('inview');
+                        this.setCompletionStatus();
+                        $('.azuremediaplayer').removeClass('azurend');
+                    }
                 }
             }
         },
@@ -147,4 +162,3 @@ define(function(require) {
 
     return azure;
 });
-
