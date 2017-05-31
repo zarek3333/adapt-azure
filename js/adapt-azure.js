@@ -125,8 +125,8 @@ define(function(require) {
                     if ( $('.vjs-ended').is('.azurend')) {
                         this.$('.azure-widget').off('inview');
                         this.setCompletionStatus();
-                        $('.azuremediaplayer').removeClass('azurend');
                     }
+                    $('.vjs-has-started.vjs-paused.vjs-ended').removeClass('azurend');
                 }
             }
         },
