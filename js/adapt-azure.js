@@ -35,7 +35,7 @@ define(function(require) {
             });
             //MOBILE TABLET VERSION
             $('.block').bind('touchmove', function (e){
-                 $('.vjs-has-started.vjs-playing.vjs-user-active').addClass('azurend');
+                $('.vjs-has-started.vjs-playing.vjs-user-active').addClass('azurend');
                 if ( $('.azuremediaplayer').hasClass('vjs-user-active')) {
                     $('.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-play-control.vjs-playing').trigger( "click" );
                 }
@@ -108,12 +108,12 @@ define(function(require) {
             }
         },
         
-        onEnded: function(event, visible2, visiblePartX2, visiblePartY2) {
-            if (visible2) {
-                if (visiblePartY2 === 'top') {
+        onEnded: function(event, visible, visiblePartX, visiblePartY) {
+            if (visible) {
+                if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
 
-                } else if (visiblePartY2 === 'bottom') {
+                } else if (visiblePartY === 'bottom') {
                     this._isVisibleBottom = true;
                 } else {
                     this._isVisibleTop = true;
@@ -121,8 +121,9 @@ define(function(require) {
                 }
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    if ( $('.azuremediaplayer').hasClass('azurend')) {
-                        this.$('.component-inner').off('inview');
+                    //IT IS BEST TO NOT HAVE AZURE VIDEO ON FIRST BLOCK IF YOU ARE USING ENDED
+                    if ( $('.vjs-ended').is('.azurend')) {
+                        this.$('.azure-widget').off('inview');
                         this.setCompletionStatus();
                         $('.azuremediaplayer').removeClass('azurend');
                     }
