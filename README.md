@@ -8,5 +8,5 @@ Component that allows Secure Microsoft Azure Video's to be used within Adapt Fra
 
 <p align="center"><b>***** IMPORTANT *******</b></p>
 ADD THE CODE BELOW TO YOUR THEMES TEMPLATE/PAGE.HBS FILE AT THE TOP <br>
-&#60;script src=&#44;//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js&#44;&#62;&#60;/script&#62; <br>
-&#60;link rel=&#44;stylesheet&#44; href=&#44;//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css&#44;&#62;
+&#60;script src=&#96;//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js&#96;&#62;&#60;/script&#62; <br>
+&#60;link rel=&#96;stylesheet&#96; href=&#96;//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css&#96;&#62;
