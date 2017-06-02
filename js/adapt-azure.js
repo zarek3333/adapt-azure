@@ -55,10 +55,12 @@ define(function(require) {
             //$(window).resize();
             
             this.$('.amp-default-skin').width(this.$('.azure-widget').width());
+            this.$('iframe').width(this.$('.azure-widget').width());
             
             var aspectRatio = (this.model.get("_media")._aspectRatio ? parseFloat(this.model.get("_media")._aspectRatio) : 1.778);//default to 16:9 if not specified
             if (!isNaN(aspectRatio)) {
                 this.$('.amp-default-skin').height(this.$('.azure-widget').width() / aspectRatio);
+                this.$('iframe').height(this.$('.azure-widget').width() / aspectRatio);
             }
         },
 
