@@ -8,7 +8,6 @@ define(function(require) {
 
     var ComponentView = require('coreViews/componentView');
     var Adapt = require('coreJS/adapt');
-    //var azuremediaplayer  = $.getScript('//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js');
 
     var azure = ComponentView.extend({
         defaults:function() {
@@ -20,12 +19,9 @@ define(function(require) {
         initialize: function() {
             ComponentView.prototype.initialize.apply(this);
 
-            _.bindAll(this, 'onPlayerReady', 'onInview', 'onPlay', 'onEnded' );
+            _.bindAll(this, 'onInview', 'onPlay', 'onEnded' );
 
             /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
-            $( "link#azurecss" ).remove();
-            $( "body" ).append("<link rel=\"stylesheet\" id=\"azurecss\" href=\"//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css\">");
-
             /* JAVASCRIPT FOR AZURE PLAYER <script src="//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
             $('.block').mousemove( function(){
                 $('.vjs-has-started.vjs-playing.vjs-user-active').addClass('azurend');
@@ -56,6 +52,8 @@ define(function(require) {
         },
 
         setIFrameSize: function () {
+            $(window).resize();
+            
             this.$('.amp-default-skin').width(this.$('.azure-widget').width());
             
             var aspectRatio = (this.model.get("_media")._aspectRatio ? parseFloat(this.model.get("_media")._aspectRatio) : 1.778);//default to 16:9 if not specified
@@ -75,7 +73,7 @@ define(function(require) {
 
         remove: function() {
             if(this.player != null) {
-                this.player.destroy();
+                this.player.dispose();
             }
 
             ComponentView.prototype.remove.call(this);
@@ -153,12 +151,6 @@ define(function(require) {
 
         onYouTubeIframeAPIReady: function() {
 
-            _.delay(function() {
-                $(window).resize();
-            }, 250);
-
-            this.onPlayerReady;
-
             this.isPlaying = false;
             
             this.setReadyStatus();
@@ -166,12 +158,6 @@ define(function(require) {
             this.setupEventListeners();
             
             this.setIFrameSize();
-        },
-
-        onPlayerReady: function() {
-            if (this.model.get("_media")._playbackQuality) {
-                this.player.setPlaybackQuality(this.model.get("_media")._playbackQuality);
-            }
         }
 
     },
