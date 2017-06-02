@@ -1,22 +1,11 @@
 <div class="azure-inner component-inner" role="region" aria-label="{{_accessibility._ariaRegions.media}}">
 	{{> component this}}
 	<div class="azure-widget component-widget">
-        <video style="width:100%;" class="azuremediaplayer amp-default-skin" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
+        <video style="width:100%;" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
 		    <source class="nohttp" src="https://{{_media._source}}" type="application/vnd.ms-sstr+xml" />
 		    <p class="amp-no-js">
 		        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
 		    </p>
 		</video>
-		{{#if _media.transcriptLink}}
-	    <div class="azure-transcript-container" role="document">
-	      <a href="{{_media.transcriptLink}}" target="_blank" class="media-transcript">
-	        {{#if _media.transcriptText}}
-	          {{_media.transcriptText}}
-	        {{else}}
-	          {{_media.transcriptLink}}
-	        {{/if}}
-	      </a>
-	    </div>
-	    {{/if}}
 	</div>
 </div>
