@@ -52,7 +52,7 @@ define(function(require) {
         },
 
         setIFrameSize: function () {
-            $(window).resize();
+            //$(window).resize();
             
             this.$('.amp-default-skin').width(this.$('.azure-widget').width());
             
