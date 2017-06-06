@@ -21,7 +21,7 @@ define(function(require) {
 
             _.bindAll(this, 'onInview', 'onPlay', 'onEnded' );
 
-            /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
+            /* CSS FOR AZURE PLAYER <link rel="stylesheet" id="azurecss" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
             /* JAVASCRIPT FOR AZURE PLAYER <script src="//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
             $('.block').mousemove( function(){
                 $('.vjs-has-started.vjs-playing.vjs-user-active').addClass('azurend');
@@ -52,8 +52,8 @@ define(function(require) {
         },
 
         setIFrameSize: function () {
-            if(!!navigator.userAgent.match(/Trident.*rv\:11\./)) { //IE11 check or not
-                //$(window).resize();
+            if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;')) { //IE11 or IE10 check or not
+                //IE NO NEED FOR WINDOW RESIZE FUNCTION
             } else {
                 $(window).resize();
             }
