@@ -14,7 +14,7 @@
 		<iframe src="//aka.ms/azuremediaplayeriframe?url=//{{_media._source}}&autoplay=false" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
 
 		<video style="width:100%;" class="azuremediaplayer amp-default-skin amp-big-play-centered removeazurevid" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
-		    <source class="nohttp" src="https://{{_media._source}}" type="application/vnd.ms-sstr+xml" />
+		    <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
 		    <p class="amp-no-js">
 		        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
 		    </p>
