@@ -3,7 +3,7 @@
 	<div class="azure-widget component-widget">
         <script type='text/javascript'>//<![CDATA[ 
 		$(function(){
-			if(!!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+			if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;')) {
 			    $( ".removeazurevid" ).remove();
 			} else {
 				$( ".removeazureie" ).remove();
