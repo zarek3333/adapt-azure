@@ -95,7 +95,7 @@ define(function(require) {
                 });
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    $('.azurend .vjs-play-control.vjs-playing').trigger( "click" );
+                    $('.azurend.vjs-user-inactive .vjs-play-control.vjs-playing').trigger( "click" );
                     this.$('.component-inner').off('inview');
                     this.setCompletionStatus();
                 }
