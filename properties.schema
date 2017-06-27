@@ -98,6 +98,84 @@
           "help": "Specifies whether or not the video will automatically start to play when the player loads (not supported on iOS)."
         }
       }
+    },
+    "_transcript": {
+      "type":"object",
+      "required":false,
+      "title": "Transcript Options",
+      "properties":{
+        "_setCompletionOnView": {
+          "type":"boolean",
+          "required":false,
+          "default": true,
+          "title": "Set Completion",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": [],
+          "help": "This tells to set this video to complete when the inline transcript is shown"
+        },
+        "_inlineTranscript": {
+          "type":"boolean",
+          "required":false,
+          "default": false,
+          "title": "Show Inline",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": []
+        },
+        "_externalTranscript": {
+          "type":"boolean",
+          "required":false,
+          "default": false,
+          "title": "Show Link",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": []
+        },
+        "inlineTranscriptButton": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "title": "Inline Open Button",
+          "inputType": "Text",
+          "validators": [],
+          "translatable": true
+        },
+        "inlineTranscriptCloseButton": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "title": "Inline Close Button",
+          "inputType": "Text",
+          "validators": [],
+          "translatable": true
+        },
+        "inlineTranscriptBody": {
+          "type":"string",
+          "required":false,
+          "default": "",
+          "title": "Inline Transcript",
+          "inputType": "TextArea",
+          "validators": [],
+          "help": "Optional text appears below the video",
+          "translatable": true
+        },
+        "transcriptLinkButton": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "title": "Link Open Button",
+          "inputType": "Text",
+          "validators": [],
+          "translatable": true
+        },
+        "transcriptLink": {
+          "type":"string",
+          "required":false,
+          "default": "",
+          "title": "Transcript Link",
+          "inputType": "Asset:other",
+          "validators": [],
+          "help": "Select a file for the transcript link"
+        }
+      }
     }
   }
 }
