@@ -22,4 +22,43 @@
 		</video>
 		</div>
 	</div>
+	
+	{{#if _transcript}}
+    <div class="azure-transcript-container">
+
+      <div class="azure-transcript-button-container">
+        {{#if _transcript._inlineTranscript}}
+          <button class="azure-inline-transcript-button button" role="button">
+            <div class="transcript-text-container">
+              {{#if _transcript.inlineTranscriptButton}}
+                {{_transcript.inlineTranscriptButton}}
+              {{else}}
+                {{_transcript.transcriptLink}}
+              {{/if}}
+            </div>
+          </button>
+        {{/if}}
+        {{#if _transcript._externalTranscript}}
+          <button onclick="window.open('{{_transcript.transcriptLink}}')" class="azure-external-transcript-button button" role="button">
+            <div class="transcript-text-container">
+              {{#if _transcript.transcriptLinkButton}}
+                {{_transcript.transcriptLinkButton}}
+              {{else}}
+                {{_transcript.transcriptLink}}
+              {{/if}}
+            </div>
+          </button>
+        {{/if}}
+        </div>
+
+        {{#if _transcript._inlineTranscript}}
+          <div class="azure-inline-transcript-body-container">
+            <div class="azure-inline-transcript-body">
+            {{{a11y_text _transcript.inlineTranscriptBody}}}
+            </div>
+          </div>
+        {{/if}}
+
+    </div>
+    {{/if}}
 </div>
