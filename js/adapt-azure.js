@@ -15,6 +15,9 @@ define(function(require) {
                 player:null
             }
         },
+        events: {
+            "click .azure-inline-transcript-button": "onToggleInlineTranscript"
+        },
 
         initialize: function() {
             ComponentView.prototype.initialize.apply(this);
@@ -153,6 +156,29 @@ define(function(require) {
                         this.$('.vjs-has-started.vjs-paused.vjs-ended').off('inview').removeClass('azurend');
                         this.setCompletionStatus();
                     }
+                }
+            }
+        },
+        
+        onToggleInlineTranscript: function(event) {
+            if (event) event.preventDefault();
+            var $transcriptBodyContainer = this.$(".azure-inline-transcript-body-container");
+            var $button = this.$(".azure-inline-transcript-button");
+
+            if ($transcriptBodyContainer.hasClass("inline-transcript-open")) {
+                $transcriptBodyContainer.slideUp(function() {
+                    $(window).resize();
+                });
+                $transcriptBodyContainer.removeClass("inline-transcript-open");
+                $button.html(this.model.get("_transcript").inlineTranscriptButton);
+            } else {
+                $transcriptBodyContainer.slideDown(function() {
+                    $(window).resize();
+                }).a11y_focus();
+                $transcriptBodyContainer.addClass("inline-transcript-open");
+                $button.html(this.model.get("_transcript").inlineTranscriptCloseButton);
+                if (this.model.get('_transcript')._setCompletionOnView !== false) {
+                    this.setCompletionStatus();
                 }
             }
         },
