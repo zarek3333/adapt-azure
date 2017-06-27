@@ -11,14 +11,14 @@
       "inputType": "Text",
       "validators": [],
       "translatable": true
-    }
-  },
+    },
     "transcriptButton": {
       "type": "string",
       "required": false,
       "default": "Alternatively you can select the link below for the transcript.",
       "inputType": "Text",
-      "validators": []
+      "validators": [],
+      "translatable": true
     }
   },
   "properties":{
