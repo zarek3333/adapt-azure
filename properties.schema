@@ -7,7 +7,7 @@
     "ariaRegion": {
       "type": "string",
       "required": true,
-      "default": "This is a Azure media player component which displays a Azure video. Press tab onto the media player file and then press tab one more time and then enter to play the video.",
+      "default": "Use the space bar on your keyboard to watch or pause the following video. You can also use space bar to read the transcript or make an adjustment to one of the video options.",
       "inputType": "Text",
       "validators": [],
       "translatable": true
