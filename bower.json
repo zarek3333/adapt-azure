@@ -9,7 +9,7 @@
     "authors": [
         "Mike Stevens <mesgraphix@gmail.com>"
     ],
-    "description": "Azure Player for Adapt",
+    "description": "Azure Video Player",
     "main": "/js/adapt-azure.js",
     "assetFields": [
         "_media[]._poster"
