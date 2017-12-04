@@ -1,21 +1,6 @@
 <div class="azure-inner component-inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
 	{{> component this}}
 	<div class="azure-widget component-widget">
-    <script type='text/javascript'>//<![CDATA[ 
-		$(function(){
-			if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;') || navigator.userAgent.match(/Edge\/\d./i) || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-			    $( ".removeazurevid" ).remove();
-			} else if ( $("html").hasClass( "accessibility" ) ) {
-				$( ".removeazurevid" ).remove();
-			} else {
-				$( ".removeazureie" ).remove();
-			}
-		});//]]>
-    //IFRAME WORKS BETTER IN MOST BROWSERS BUT NOT VERY TRACKABLE FOR COMPLETION
-		</script>
-
-		<iframe tabindex="0" aria-level="4" src="//aka.ms/azuremediaplayeriframe?url=//{{_media._source}}&autoplay=false" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
-
 		<div class='embed-container removeazurevid'>
 		<video style="width:100%;" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
 		    <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
