@@ -2,7 +2,7 @@
 	{{> component this}}
 	<div class="azure-widget component-widget">
 		<div class='embed-container removeazurevid'>
-		<video style="width:100%;" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
+		<video style="width:100%;" id="{{_id}}" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
 		    <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
 		    <p class="amp-no-js">
 		        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
