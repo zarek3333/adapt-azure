@@ -9,7 +9,7 @@
 			  $(this).attr( "aria-label", "Play Video" );
 			  $(this).attr( "role", "button" );
 			});
-		    }, 100);
+		    }, 1000);
 		</script>
 		<video style="width:100%;" id="{{_id}}" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
 		    <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
