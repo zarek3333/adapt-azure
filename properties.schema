@@ -61,6 +61,15 @@
           "validators": [],
           "help": "The 'embed' URL of the Azure video you want to be displayed (DON'T INCLUDE HTTP:// OR HTTPS://)"
         },
+        "_iesrc": {
+          "type":"string",
+          "required":true,
+          "default": "www.vubiz.com/chaccess/mp4/bigbunny.m4v",
+          "title": "Source URL for Internet Explorer 11 (DON'T INCLUDE HTTP:// OR HTTPS://)",
+          "inputType": "Text",
+          "validators": [],
+          "help": "The 'embed' URL of the Azure video which is only for IE browser 10 & 11 (DON'T INCLUDE HTTP:// OR HTTPS://)"
+        },
         "_aspectRatio": {
           "type":"number",
           "required":false,
