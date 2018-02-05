@@ -1,26 +1,41 @@
 <div class="azure-inner component-inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
-	{{> component this}}
-	<div class="azure-widget component-widget">
-		<div class='embed-container removeazurevid'>
-		<script>
-		    window.setTimeout(function(){ 
-			$('.vjs-big-play-button').each(function() {
-			  $(this).attr( "tabindex", "0" );
-			  $(this).attr( "aria-label", "Play Video" );
-			  $(this).attr( "role", "button" );
-			});
-		    }, 1000);
-		</script>
-		<video data-setup='{"techOrder": ["azureHtml5JS", "html5FairPlayHLS", "html5"]}' style="width:100%;" id="{{_id}}" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
-		    <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
-		    <p class="amp-no-js">
-		        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
-		    </p>
-		</video>
-		</div>
-	</div>
-	
-	{{#if _transcript}}
+  {{> component this}}
+  <div class="azure-widget component-widget">
+    <script type='text/javascript'>//<![CDATA[ 
+    $(function(){
+      if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;')) {
+          $( ".removeazurevid" ).remove();
+      } else {
+        $( ".removeazureie" ).remove();
+      }
+    });//]]>
+    </script>
+
+    <video width="1258" height="705" style="width:100%; height:100%;" class="removeazureie azurend vjs-has-started vjs-ended" poster="{{_media._poster}}" controls>
+      <source src="//{{_media._iesrc}}" type="video/mp4">Your browser does not support the video tag.
+    </video>
+
+    <div class='embed-container removeazurevid'>
+      <script>
+          window.setTimeout(function(){ 
+        $('.vjs-big-play-button').each(function() {
+          $(this).attr( "tabindex", "0" );
+          $(this).attr( "aria-label", "Play Video" );
+          $(this).attr( "role", "button" );
+        });
+          }, 1000);
+      </script>
+
+      <video data-setup='{"techOrder": ["azureHtml5JS", "html5FairPlayHLS", "html5"]}' style="width:100%;" id="{{_id}}" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"], "nativeControlsForTouch": false}'>
+          <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
+          <p class="amp-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+          </p>
+      </video>
+    </div>
+  </div>
+  
+  {{#if _transcript}}
     <div class="azure-transcript-container">
 
       <div class="azure-transcript-button-container">
