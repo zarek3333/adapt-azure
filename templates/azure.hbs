@@ -3,17 +3,18 @@
   <div class="azure-widget component-widget">
     <script type='text/javascript'>//<![CDATA[ 
     $(function(){
-      if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;')) {
+      if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;') || navigator.userAgent.match(/Edge\/\d./i) || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.toLowerCase().indexOf("android") > -1 || navigator.userAgent.indexOf("WOW64") != -1) {
           $( ".removeazurevid" ).remove();
+      } else if ( $("html").hasClass( "accessibility" ) ) {
+        $( ".removeazurevid" ).remove();
       } else {
         $( ".removeazureie" ).remove();
-      }
+      } 
     });//]]>
+    //IFRAME WORKS BETTER IN MOST BROWSERS BUT NOT VERY TRACKABLE FOR COMPLETION
     </script>
 
-    <video width="1258" height="705" style="width:100%; height:100%;" class="removeazureie azurend vjs-has-started vjs-ended" poster="{{_media._poster}}" controls>
-      <source src="//{{_media._iesrc}}" type="video/mp4">Your browser does not support the video tag.
-    </video>
+    <iframe tabindex="0" aria-level="4" src="assets/azure.htm?url=//{{_media._source}}&autoplay=false" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
 
     <div class='embed-container removeazurevid'>
       <script>
