@@ -3,13 +3,15 @@
   <div class="azure-widget component-widget">
     <script type='text/javascript'>//<![CDATA[ 
     $(function(){
-      if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;') || navigator.userAgent.match(/Edge\/\d./i) || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.toLowerCase().indexOf("android") > -1 || navigator.userAgent.indexOf("WOW64") != -1) {
+      if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;') || navigator.userAgent.match(/Edge\/\d./i) || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.toLowerCase().indexOf("android") > -1 ) {
           $( ".removeazurevid" ).remove();
       } else if ( $("html").hasClass( "accessibility" ) ) {
         $( ".removeazurevid" ).remove();
+      } else if (navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1 ) {
+        $( ".removeazureie" ).remove();
       } else {
         $( ".removeazureie" ).remove();
-      } 
+      }
     });//]]>
     //IFRAME WORKS BETTER IN MOST BROWSERS BUT NOT VERY TRACKABLE FOR COMPLETION
     </script>
