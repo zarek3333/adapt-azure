@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VUBIZ Media Player Embed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//amp.azure.net/libs/amp/2.1.3/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+	<script src="//amp.azure.net/libs/amp/2.1.3/azuremediaplayer.min.js"></script>
+    <script src="../libraries/jquery.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100%;
+            margin: 0px;
+        }
+        .embed-container {
+          position: relative;
+          padding-bottom: 56.25%; /* 16x9 */
+          height: 0;
+          overflow: hidden;
+          max-width: 100%;
+          height: auto;
+        }
+        .embed-container .azuremediaplayer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100% !important;
+          height: 100% !important;
+        }
+        @media (max-width: 1366px) and (min-width: 1280px) {
+            .azure-component.component-full .azure-widget .amp-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
+            .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
+        }
+    </style>
+</head>
+
+<div class='embed-container removeazurevid'>
+      <script>
+          window.setTimeout(function(){ 
+          $('.vjs-big-play-button').attr( "tabindex", "0" );
+          $('.vjs-big-play-button').attr( "aria-label", "Play Video" );
+          $('.vjs-big-play-button').attr( "role", "button" );
+          }, 1000);
+      </script>
+
+      <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"></video>
+
+  </div>
+
+<script>
+var sVidUrl = qs("url");
+var myOptions = {
+	"nativeControlsForTouch": false,
+	controls: true,
+	autoplay: false,
+	width: "100%",
+	height: "100%",
+}
+myPlayer = amp("azuremediaplayer", myOptions);
+myPlayer.src([
+        {
+                "src": sVidUrl,
+                "type": "application/vnd.ms-sstr+xml"
+        }
+]);
+
+function qs(key) {
+    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+}
+</script>
+
+</body>
+</html>
