@@ -6,7 +6,7 @@
     <title>VUBIZ Media Player Embed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//amp.azure.net/libs/amp/2.1.3/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
-	   <script src="//amp.azure.net/libs/amp/2.1.3/azuremediaplayer.min.js"></script>
+     <script src="//amp.azure.net/libs/amp/2.1.3/azuremediaplayer.min.js"></script>
     <style>
         html, body {
             height: 100%;
@@ -43,21 +43,104 @@
 
 <script>
 var sVidUrl = qs("url");
+var sCap = qs("captions");
+
 var myOptions = {
-	"nativeControlsForTouch": false,
-	"logo": { "enabled": false },
-	controls: true,
-	autoplay: false,
-	width: "100%",
-	height: "100%",
+  "nativeControlsForTouch": false,
+  "logo": { "enabled": false },
+  controls: true,
+  autoplay: false,
+  width: "100%",
+  height: "100%",
 }
 myPlayer = amp("azuremediaplayer", myOptions);
-myPlayer.src([
-        {
-                "src": sVidUrl,
-                "type": "application/vnd.ms-sstr+xml"
-        }
-]);
+
+
+if(sCap === null || sCap === undefined || sCap === "" ){
+  myPlayer.src([
+          {
+                  "src": sVidUrl,
+                  "type": "application/vnd.ms-sstr+xml"
+          }
+  ]);
+
+} else if (sCap.includes('french,fr,')) {
+
+	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+
+  myPlayer.src([
+          {
+                  "src": sVidUrl,
+                  "type": "application/vnd.ms-sstr+xml"
+          }
+  ],
+  [
+          {
+                  "src": RevsCap,
+                  "srclang": "fr",
+                  "label": "french",
+                  "kind": "captions"
+          }
+  ]);
+
+} else if (sCap.includes('spanish,es,')) {
+
+	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+
+  myPlayer.src([
+          {
+                  "src": sVidUrl,
+                  "type": "application/vnd.ms-sstr+xml"
+          }
+  ],
+  [
+          {
+                  "src": RevsCap,
+                  "srclang": "es",
+                  "label": "spanish",
+                  "kind": "captions"
+          }
+  ]);
+
+} else if (sCap.includes('italian,it,')) {
+
+	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+
+  myPlayer.src([
+          {
+                  "src": sVidUrl,
+                  "type": "application/vnd.ms-sstr+xml"
+          }
+  ],
+  [
+          {
+                  "src": RevsCap,
+                  "srclang": "it",
+                  "label": "italian",
+                  "kind": "captions"
+          }
+  ]);
+
+}else{
+
+	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+
+  myPlayer.src([
+          {
+                  "src": sVidUrl,
+                  "type": "application/vnd.ms-sstr+xml"
+          }
+  ],
+  [
+          {
+                  "src": RevsCap,
+                  "srclang": "en",
+                  "label": "english",
+                  "kind": "captions"
+          }
+  ]);
+
+}
 
 function qs(key) {
     key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
