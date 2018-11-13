@@ -14,7 +14,7 @@
     //IFRAME WORKS BETTER IN MOST BROWSERS BUT NOT VERY TRACKABLE FOR COMPLETION //navigator.userAgent.match(/iPad/i)
     </script>
 
-    <iframe tabindex="0" aria-level="4" src="assets/azure.htm?url=//{{_media._source}}&autoplay=false" id="{{_id}}" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
+    <iframe tabindex="0" aria-level="4" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}{{else}}{{/if}}&autoplay=false" id="{{_id}}" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
 
     <div class='embed-container removeazurevid'>
       <script>
@@ -29,6 +29,7 @@
 
       <video data-setup='{"logo": { "enabled": false}, "techOrder": ["azureHtml5JS", "html5FairPlayHLS", "html5"]}' style="width:100%;" id="{{_id}}" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}">
           <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
+          {{#if _media._captions}}<track kind="captions" src="//{{_media._captions}}" srclang="{{_media._srclang}}" label="{{_media._caplabel}}">{{else}}{{/if}}
           <p class="amp-no-js">
               To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
           </p>
