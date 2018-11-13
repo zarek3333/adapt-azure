@@ -79,6 +79,35 @@
             "validators": ["required"],
             "help": "This is where the poster image path is placed."
         },
+        "_captions": {
+          "type":"string",
+          "required":false,
+          "default": "",
+          "title": "Closed Captions Source URL (DON'T INCLUDE HTTP:// OR HTTPS://) example: ms01.streaming.mediaservices.windows.net/e0f48336-a4bc-464e-8cfc-de0614c4aa19/MP1.vtt",
+          "inputType": "Text",
+          "validators": [],
+          "help": "The 'embed' closed captions URL including the vtt file for the Azure video you want to be displayed (DON'T INCLUDE HTTP:// OR HTTPS://)"
+        },
+        "_srclang": {
+          "type": "string",
+          "required": false,
+          "enum": ["en", "fr", "es", "it"],
+          "inputType": {"type": "Select", "options": ["en", "fr", "es", "it"]},
+          "title": "Select Source of Closed Captions Language",
+          "default": "en",
+          "validators": [],
+          "help": "Choose an sourse for the closed captions language"
+        },
+        "_caplabel": {
+          "type": "string",
+          "required": false,
+          "enum": ["english", "french", "spanish", "italian"],
+          "inputType": {"type": "Select", "options": ["english", "french", "spanish", "italian"]},
+          "title": "Select Closed Captions Language",
+          "default": "english",
+          "validators": [],
+          "help": "Choose an the language for you closed captions"
+        },
         "_controls": {
           "type":"boolean",
           "required":false,
