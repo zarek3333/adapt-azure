@@ -83,7 +83,7 @@
           "type":"string",
           "required":false,
           "default": "",
-          "title": "Closed Captions Source URL (DON'T INCLUDE HTTP:// OR HTTPS://) example: ms01.streaming.mediaservices.windows.net/e0f48336-a4bc-464e-8cfc-de0614c4aa19/MP1.vtt",
+          "title": "Closed Captions Source URL example: ms01.streaming.mediaservices.windows.net/abc123-123abc-wrds456/MP1.vtt",
           "inputType": "Text",
           "validators": [],
           "help": "The 'embed' closed captions URL including the vtt file for the Azure video you want to be displayed (DON'T INCLUDE HTTP:// OR HTTPS://)"
