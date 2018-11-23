@@ -44,6 +44,7 @@
 <script>
 var sVidUrl = qs("url");
 var sCap = qs("captions");
+var daPoster = qs("poster");
 
 var myOptions = {
   "nativeControlsForTouch": false,
@@ -52,6 +53,7 @@ var myOptions = {
   autoplay: false,
   width: "100%",
   height: "100%",
+  poster: "../"+ daPoster,
 }
 myPlayer = amp("azuremediaplayer", myOptions);
 
@@ -66,7 +68,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
 
 } else if (sCap.includes('french,fr,')) {
 
-	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+  var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
 
   myPlayer.src([
           {
@@ -85,7 +87,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
 
 } else if (sCap.includes('spanish,es,')) {
 
-	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+  var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
 
   myPlayer.src([
           {
@@ -104,7 +106,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
 
 } else if (sCap.includes('italian,it,')) {
 
-	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+  var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
 
   myPlayer.src([
           {
@@ -123,7 +125,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
 
 }else{
 
-	var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
+  var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
 
   myPlayer.src([
           {
