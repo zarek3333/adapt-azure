@@ -91,7 +91,7 @@
         "_captiononauto": {
           "type":"boolean",
           "required":false,
-          "default": "false",
+          "default": false,
           "title": "Turn caption on by default",
           "inputType": {"type": "Boolean", "options": [true, false]},
           "validators": [],
@@ -120,7 +120,7 @@
         "_controls": {
           "type":"boolean",
           "required":false,
-          "default": "true",
+          "default": true,
           "title": "Show Controls",
           "inputType": {"type": "Boolean", "options": [true, false]},
           "validators": [],
@@ -129,7 +129,7 @@
         "_autoplay": {
           "type":"boolean",
           "required":false,
-          "default": "false",
+          "default": false,
           "title": "Autoplay",
           "inputType": {"type": "Boolean", "options": [true, false]},
           "validators": [],
