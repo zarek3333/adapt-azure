@@ -88,6 +88,15 @@
           "validators": [],
           "help": "The 'embed' closed captions URL including the vtt file for the Azure video you want to be displayed (DON'T INCLUDE HTTP:// OR HTTPS://)"
         },
+        "_captiononauto": {
+          "type":"boolean",
+          "required":false,
+          "default": "false",
+          "title": "Turn caption on by default",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": [],
+          "help": "This sets the video to load with captions on by default. The language selected is the one displayed."
+        },
         "_srclang": {
           "type": "string",
           "required": false,
