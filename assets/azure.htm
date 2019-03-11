@@ -85,6 +85,23 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
   ]);
 
+  var setTrack = function (language, kind) {
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].mode != "disabled") {
+                  myPlayer.textTracks_.tracks_[i].mode = "disabled";
+              }
+          }
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].language == language && myPlayer.textTracks_.tracks_[i].kind == kind) {
+                  myPlayer.textTracks_.tracks_[i].mode = "showing";
+                  break;
+              }
+          }
+      }
+  myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
+    setTrack("fr", "captions");
+  });
+
 } else if (sCap.includes('spanish,es,')) {
 
   var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
@@ -103,6 +120,23 @@ if(sCap === null || sCap === undefined || sCap === "" ){
                   "kind": "captions"
           }
   ]);
+
+  var setTrack = function (language, kind) {
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].mode != "disabled") {
+                  myPlayer.textTracks_.tracks_[i].mode = "disabled";
+              }
+          }
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].language == language && myPlayer.textTracks_.tracks_[i].kind == kind) {
+                  myPlayer.textTracks_.tracks_[i].mode = "showing";
+                  break;
+              }
+          }
+      }
+  myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
+    setTrack("es", "captions");
+  });
 
 } else if (sCap.includes('italian,it,')) {
 
@@ -123,6 +157,23 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
   ]);
 
+  var setTrack = function (language, kind) {
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].mode != "disabled") {
+                  myPlayer.textTracks_.tracks_[i].mode = "disabled";
+              }
+          }
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].language == language && myPlayer.textTracks_.tracks_[i].kind == kind) {
+                  myPlayer.textTracks_.tracks_[i].mode = "showing";
+                  break;
+              }
+          }
+      }
+  myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
+    setTrack("it", "captions");
+  });
+
 }else{
 
   var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
@@ -141,6 +192,23 @@ if(sCap === null || sCap === undefined || sCap === "" ){
                   "kind": "captions"
           }
   ]);
+
+  var setTrack = function (language, kind) {
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].mode != "disabled") {
+                  myPlayer.textTracks_.tracks_[i].mode = "disabled";
+              }
+          }
+          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
+              if (myPlayer.textTracks_.tracks_[i].language == language && myPlayer.textTracks_.tracks_[i].kind == kind) {
+                  myPlayer.textTracks_.tracks_[i].mode = "showing";
+                  break;
+              }
+          }
+      }
+  myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
+    setTrack("en", "captions");
+  });
 
 }
 
