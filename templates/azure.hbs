@@ -1,22 +1,30 @@
 <div class="azure-inner component-inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
   {{> component this}}
   <div class="azure-widget component-widget">
+    
+    {{#if _media._captiononauto}}
+    <script>
+      $( "#video_{{_id}}.removeazurevid" ).remove();
+    </script>
+    {{else}}
     <script type='text/javascript'>//<![CDATA[ 
     $(function(){
       if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;') || navigator.userAgent.match(/Edge\/\d./i) || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.toLowerCase().indexOf("android") > -1 ) {
-          $( ".removeazurevid" ).remove();
+          $( "#video_{{_id}}.removeazurevid" ).remove();
       } else if ( $("html").hasClass( "accessibility" ) ) {
-        $( ".removeazurevid" ).remove();
+        $( "#video_{{_id}}.removeazurevid" ).remove();
       } else {
-        $( ".removeazureie" ).remove();
+        $( "#{{_id}}.removeazureie" ).remove();
       }
     });//]]>
     //IFRAME WORKS BETTER IN MOST BROWSERS BUT NOT VERY TRACKABLE FOR COMPLETION //navigator.userAgent.match(/iPad/i)
     </script>
+    {{/if}}
+
 
     <iframe tabindex="0" aria-level="4" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}{{else}}{{/if}}&autoplay=false&poster={{_media._poster}}" id="{{_id}}" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
 
-    <div class='embed-container removeazurevid'>
+    <div class='embed-container removeazurevid' id="video_{{_id}}">
       <script>
           window.setTimeout(function(){ 
         $('.vjs-big-play-button').each(function() {
