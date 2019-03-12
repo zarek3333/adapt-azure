@@ -28,6 +28,10 @@
           width: 100% !important;
           height: 100% !important;
         }
+        .amp-default-skin .vjs-poster img {
+            object-fit: cover;
+            width: 100%;
+        }
         @media (max-width: 1366px) and (min-width: 1280px) {
             .azure-component.component-full .azure-widget .amp-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
             .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
@@ -64,7 +68,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
   ]);
 
-} else if (sCap.includes('french,fr,')) {
+} else if (sCap.indexOf('french,fr,') >= 0) {
 
   var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
   var myOptions = {
@@ -110,7 +114,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     setTrack("fr", "captions");
   });
 
-} else if (sCap.includes('spanish,es,')) {
+} else if (sCap.indexOf('spanish,es,') >= 0) {
 
   var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
   var myOptions = {
@@ -156,7 +160,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     setTrack("es", "captions");
   });
 
-} else if (sCap.includes('italian,it,')) {
+} else if (sCap.indexOf('italian,it,') >= 0) {
 
   var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
   var myOptions = {
