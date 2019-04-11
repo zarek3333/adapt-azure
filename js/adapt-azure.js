@@ -32,7 +32,7 @@ define(function(require) {
                     Adapt.azureAPIReady = true;
                     Adapt.trigger('azureAPIReady');
                 };
-                $.getScript('//rawgit.com/mike-st/adapt-azure/master/js/www-widgetapi.js');
+                $.getScript('assets/www-widgetapi.js');
             }
         },
 
