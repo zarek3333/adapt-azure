@@ -70,17 +70,20 @@ define(function(require) {
         },
     
         setupEventListeners: function() {
+            var currentazureon = this.model.get('_id');
             this.completionEvent = (!this.model.get('_setCompletionOn')) ? 'play' : this.model.get('_setCompletionOn');
             if (this.completionEvent === "inview") {
-                this.$('.azure-widget').on('inview', this.onInview);
+                $('.' + currentazureon + ' .azure-widget').on('inview', this.onInview);
             } else if (this.completionEvent === "play") {
-                this.$('.azure-widget').on('inview', this.onPlay);
+                $('.' + currentazureon + ' .azure-widget').on('inview', this.onPlay);
             } else if (this.completionEvent === "ended") {
-                this.$('.azure-widget').on('inview', this.onEnded);
+                $('.' + currentazureon + ' .azure-widget').on('inview', this.onEnded);
             }
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
+             var currentazureon = this.model.get('_id');
+             $('.' + currentazureon + ' .removeazureie').addClass('azureinviewmode');
             if (visible) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
@@ -91,21 +94,18 @@ define(function(require) {
                     this._isVisibleBottom = true;
                 }
 
-                $('.block .azuremediaplayer').each(function(index) {
-                    $(this).on("click", function(){
-                        $(this).addClass('azurend').stop();
-                    });
-                });
-
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    $('.azurend.vjs-user-inactive .vjs-play-control.vjs-playing').trigger( "click" );
                     this.$('.component-inner').off('inview');
-                    this.setCompletionStatus();
+                    if ( $('.' + currentazureon + ' .removeazureie').hasClass('azureinviewmode') ) {
+                        this.setCompletionStatus();
+                    }
                 }
             }
         },
         
         onPlay: function(event, visible, visiblePartX, visiblePartY) {
+            var currentazureon = this.model.get('_id');
+            $('.' + currentazureon + ' .removeazureie').addClass('azureplaymode');
             if (visible) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
@@ -116,16 +116,8 @@ define(function(require) {
                     this._isVisibleBottom = true;
                 }
 
-                $('.block .azuremediaplayer').each(function(index) {
-                    $(this).on("click", function(){
-                        $(this).addClass('azurend').stop();
-                    });
-                });
-
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    $('.azurend .vjs-play-control.vjs-playing').trigger( "click" );
-                    if ( $('.azurend').is('.vjs-has-started') ) {
-                        this.$('.azuremediaplayer').off('inview').removeClass('azurend');
+                    if ( $('.' + currentazureon + ' .azureplaymode').hasClass('vjs-has-started') ) {
                         this.setCompletionStatus();
                     }
                 }
@@ -133,6 +125,8 @@ define(function(require) {
         },
         
         onEnded: function(event, visible, visiblePartX, visiblePartY) {
+             var currentazureon = this.model.get('_id');
+             $('.' + currentazureon + ' .removeazureie').addClass('azureendmode');
             if (visible) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
@@ -144,16 +138,8 @@ define(function(require) {
                     this._isVisibleBottom = true;
                 }
 
-                $('.block .azuremediaplayer').each(function(index) {
-                    $(this).on("click", function(){
-                        $(this).addClass('azurend').stop();
-                    });
-                });
-
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    $('.azurend .vjs-play-control.vjs-playing').trigger( "click" );
-                    if ( $('.vjs-ended').is('.azurend')) {
-                        this.$('.vjs-has-started.vjs-paused.vjs-ended').off('inview').removeClass('azurend');
+                    if ( $('.' + currentazureon + ' .azureendmode').hasClass('vjs-ended')) {
                         this.setCompletionStatus();
                     }
                 }
