@@ -1,48 +1,9 @@
 <div class="azure-inner component-inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
   {{> component this}}
   <div class="azure-widget component-widget">
-    
-    {{#if _media._captiononauto}}
-    <script>
-      $( "#video_{{_id}}.removeazurevid" ).remove();
-    </script>
-    {{else}}
-    <script type='text/javascript'>//<![CDATA[ 
-    $(function(){
-      if(!!navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.userAgent.match('MSIE 10.0;') || navigator.userAgent.match(/Edge\/\d./i) || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.toLowerCase().indexOf("android") > -1 ) {
-          $( "#video_{{_id}}.removeazurevid" ).remove();
-      } else if ( $("html").hasClass( "accessibility" ) ) {
-        $( "#video_{{_id}}.removeazurevid" ).remove();
-      } else {
-        $( "#{{_id}}.removeazureie" ).remove();
-      }
-    });//]]>
-    //IFRAME WORKS BETTER IN MOST BROWSERS BUT NOT VERY TRACKABLE FOR COMPLETION //navigator.userAgent.match(/iPad/i)
-    </script>
-    {{/if}}
 
+    <iframe tabindex="0" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}{{else}}{{/if}}&autoplay=false&poster={{_media._poster}}" id="{{_id}}" class="removeazureie" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
 
-    <iframe tabindex="0" aria-level="4" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}{{else}}{{/if}}&autoplay=false&poster={{_media._poster}}" id="{{_id}}" class="removeazureie azurend vjs-has-started vjs-ended" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
-
-    <div class='embed-container removeazurevid' id="video_{{_id}}">
-      <script>
-          window.setTimeout(function(){ 
-        $('.vjs-big-play-button').each(function() {
-          $(this).attr( "tabindex", "0" );
-          $(this).attr( "aria-label", "Play Video" );
-          $(this).attr( "role", "button" );
-        });
-          }, 1000);
-      </script>
-
-      <video data-setup='{"logo": { "enabled": false}, "techOrder": ["azureHtml5JS", "html5FairPlayHLS", "html5"]}' style="width:100%;" id="{{_id}}" tabindex="0" aria-level="4" class="azuremediaplayer amp-default-skin amp-big-play-centered" {{#if _media._autoplay}}autoplay{{else}}{{/if}} {{#if _media._controls}}controls{{else}}{{/if}} poster="{{_media._poster}}">
-          <source class="nohttp" src="//{{_media._source}}" type="application/vnd.ms-sstr+xml" />
-          {{#if _media._captions}}<track kind="captions" src="//{{_media._captions}}" srclang="{{_media._srclang}}" label="{{_media._caplabel}}">{{else}}{{/if}}
-          <p class="amp-no-js">
-              To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
-          </p>
-      </video>
-    </div>
   </div>
   
   {{#if _transcript}}
@@ -51,7 +12,7 @@
       <div class="azure-transcript-button-container">
         {{#if _transcript._inlineTranscript}}
           <button class="azure-inline-transcript-button button" tabindex="0" role="button">
-            <div class="transcript-text-container">
+            <div class="transcript-text-container" tabindex="0">
               {{#if _transcript.inlineTranscriptButton}}
                 {{_transcript.inlineTranscriptButton}}
               {{else}}
@@ -75,7 +36,7 @@
 
         {{#if _transcript._inlineTranscript}}
           <div class="azure-inline-transcript-body-container">
-            <div class="azure-inline-transcript-body">
+            <div class="azure-inline-transcript-body" tabindex="0">
             {{{a11y_text _transcript.inlineTranscriptBody}}}
             </div>
           </div>
