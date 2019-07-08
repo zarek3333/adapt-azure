@@ -49,6 +49,8 @@
 <script>
 var sVidUrl = qs("url");
 var sCap = qs("captions");
+var daAutoplay = qs("autoplay") == "true" ? true : false;
+var daControls = qs("controls") == "true" ? true : false;
 var daPoster = qs("poster");
 
 
@@ -56,8 +58,8 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   var myOptions = {
     "nativeControlsForTouch": false,
     "logo": { "enabled": false },
-    controls: true,
-    autoplay: false,
+    controls: daControls,
+    autoplay: daAutoplay,
     width: "100%",
     height: "100%",
     poster: "../"+ daPoster,
@@ -71,11 +73,11 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   ]);
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
   });
 
 } else if (sCap.indexOf('french,fr,') >= 0) {
@@ -84,8 +86,8 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   var myOptions = {
     "nativeControlsForTouch": false,
     "logo": { "enabled": false },
-    controls: true,
-    autoplay: false,
+    controls: daControls,
+    autoplay: daAutoplay,
     width: "100%",
     height: "100%",
     poster: "../"+ daPoster,
@@ -125,11 +127,11 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
   });
 
 } else if (sCap.indexOf('spanish,es,') >= 0) {
@@ -138,8 +140,8 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   var myOptions = {
     "nativeControlsForTouch": false,
     "logo": { "enabled": false },
-    controls: true,
-    autoplay: false,
+    controls: daControls,
+    autoplay: daAutoplay,
     width: "100%",
     height: "100%",
     poster: "../"+ daPoster,
@@ -179,11 +181,11 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
   });
 
 } else if (sCap.indexOf('italian,it,') >= 0) {
@@ -192,8 +194,8 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   var myOptions = {
     "nativeControlsForTouch": false,
     "logo": { "enabled": false },
-    controls: true,
-    autoplay: false,
+    controls: daControls,
+    autoplay: daAutoplay,
     width: "100%",
     height: "100%",
     poster: "../"+ daPoster,
@@ -233,11 +235,11 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
   });
 
 }else{
@@ -246,8 +248,8 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   var myOptions = {
     "nativeControlsForTouch": false,
     "logo": { "enabled": false },
-    controls: true,
-    autoplay: false,
+    controls: daControls,
+    autoplay: daAutoplay,
     width: "100%",
     height: "100%",
     poster: "../"+ daPoster,
@@ -287,11 +289,11 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=false&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
   });
 
 }
