@@ -126,6 +126,15 @@
           "validators": [],
           "help": "Do you wish to show controls or not."
         },
+        "_setFullscreen": {
+          "type":"boolean",
+          "required":false,
+          "default": true,
+          "title": "Show Fullscreen Button",
+          "inputType": {"type": "Boolean", "options": [true, false]},
+          "validators": [],
+          "help": "Do you wish to show the fullscreen button or not."
+        },
         "_autoplay": {
           "type":"boolean",
           "required":false,
