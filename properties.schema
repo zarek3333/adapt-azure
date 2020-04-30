@@ -126,6 +126,16 @@
           "validators": [],
           "help": "Do you wish to show controls or not."
         },
+        "_scrubber": {
+          "type": "string",
+          "required": false,
+          "enum": ["scrubber", "no-scrubber"],
+          "inputType": {"type": "Select", "options": ["scrubber", "no-scrubber"]},
+          "title": "Enable Video Scrubber",
+          "default": "scrubber",
+          "validators": [],
+          "help": "Choose to show the video scrubber or not."
+        },
         "_setFullscreen": {
           "type":"boolean",
           "required":false,
