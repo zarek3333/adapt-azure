@@ -34,6 +34,7 @@
             width: 100%;
         }
         .amp-default-skin.nofullscreen .vjs-fullscreen-control {display: none;}
+        .noscrubber .amp-default-skin .vjs-progress-holder .vjs-play-progress, .noscrubber .amp-default-skin .vjs-progress-holder .vjs-load-progress, .noscrubber .amp-default-skin .vjs-progress-holder .vjs-load-progress div, .noscrubber .amp-default-skin .vjs-progress-control, .noscrubber .amp-default-skin .vjs-slider-handle, .noscrubber .amp-default-skin .vjs-progress-control .vjs-mouse-display, .noscrubber .amp-default-skin .vjs-progress-holder {display:none;}
         @media (max-width: 1366px) and (min-width: 1280px) {
             .azure-component.component-full .azure-widget .amp-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
             .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
@@ -50,6 +51,7 @@
 <script>
 var sVidUrl = qs("url");
 var sCap = qs("captions");
+var daScrubber = qs("scrubber");
 var daAutoplay = qs("autoplay") == "true" ? true : false;
 var daControls = qs("controls") == "true" ? true : false;
 var daFullscreen = qs("fullscreen") == "true" ? true : false;
@@ -75,14 +77,14 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   ]);
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-ended');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 } else if (sCap.indexOf('french,fr,') >= 0) {
@@ -133,14 +135,14 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-ended');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 } else if (sCap.indexOf('spanish,es,') >= 0) {
@@ -191,14 +193,14 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-ended');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 } else if (sCap.indexOf('italian,it,') >= 0) {
@@ -249,14 +251,14 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-ended');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 }else{
@@ -307,16 +309,23 @@ if(sCap === null || sCap === undefined || sCap === "" ){
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-has-started');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).addClass('vjs-ended');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
+}
+
+if(daScrubber === "no-scrubber"){
+    this.$(".embed-container").addClass("noscrubber");
+    console.log("Azure has no scrubber");
+} else{
+  //do nothing
 }
 
 function qs(key) {
