@@ -157,4 +157,4 @@ u("YT.unsubscribe",function(a,b,c){$a(a,b,c)});
 u("YT.Player",X);u("YT.Thumbnail",Y);u("YT.UploadWidget",Z);S.prototype.destroy=S.prototype.P;S.prototype.setSize=S.prototype.S;S.prototype.getIframe=S.prototype.R;S.prototype.addEventListener=S.prototype.addEventListener;X.prototype.getVideoEmbedCode=X.prototype.V;X.prototype.getOptions=X.prototype.U;X.prototype.getOption=X.prototype.T;Z.prototype.setVideoDescription=Z.prototype.K;Z.prototype.setVideoKeywords=Z.prototype.M;Z.prototype.setVideoPrivacy=Z.prototype.N;Z.prototype.setVideoTitle=Z.prototype.O;
 Z.prototype.setVideoDraftPrivacy=Z.prototype.L;xb.push(function(){var a=Ab("player");x(a,Kb)});
 xb.push(function(){var a=Ab("thumbnail");x(a,Ob)});
-"undefined"!=typeof YTConfig&&YTConfig.parsetags&&"onload"!=YTConfig.parsetags||zb();var Qb=n("onYTReady");Qb&&Qb();var Rb=n("onYouTubeIframeAPIReady");Rb&&Rb();var Sb=n("onYouTubePlayerAPIReady");Sb&&Sb();}).call(this);
+"undefined"!=typeof YTConfig&&YTConfig.parsetags&&"onload"!=YTConfig.parsetags||zb();var Qb=n("onYTReady");Qb&&Qb();var Rb=n("onAzureIframeAPIReady");Rb&&Rb();var Sb=n("onYouTubePlayerAPIReady");Sb&&Sb();}).call(this);

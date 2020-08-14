@@ -1,16 +1,5 @@
-.azure-component {
+.azure {
   text-align:center;
-  .azure-transcript {
-    padding: @button-padding;
-    display: block;
-    color: @button-text-color;
-    background-color: @button-color;
-    text-decoration: none;
-    &:hover {
-      color: @button-text-hover-color;
-      background-color: @button-hover-color;
-    }
-  }
 }
 
 .embed-container {
@@ -29,36 +18,34 @@
   height: 100% !important;
 }
 
-.azure-transcript {
-    padding: @button-padding;
+.azure__transcript-btn {
+    padding: @btn-padding;
     display: block;
-    color: @button-text-color;
-    background-color: @button-color;
+    color: @font-color-inverted;
+    background-color: @item-color;
     text-decoration: none;
+    border-radius: 5px;
+    margin-top: 5px;
     &:hover {
-        color: @button-text-color-hover;
-        background-color: @button-color-hover;
+        color: @item-color-inverted-hover;
+        background-color: @item-color-hover;
     }
 }
 
-.azure-transcript-container, .azure-body, .azure-instruction {
+.azure__transcript-container, .azure__title, .azure__body, .azure__instruction {
     text-align: left;
 }
 
-.azure-inline-transcript-body-container {
+.azure__transcript-body-inline {
     margin-top: 10px;
     display: none;
 }
 
-.azure-inline-transcript-body {
-    padding: @component-padding;
+.azure__transcript-body-inline-inner {
+    padding: 20px;
 }
 
-.azure-transcript-button-container {
-    padding:1px;
-}
-
-.azure-external-transcript-button, .azure-inline-transcript-button {
+.azure__transcript-btn-external, .azure__transcript-btn-inline {
     width:100%;
     display:block;
 }
@@ -68,13 +55,17 @@
 }
 
 @media (max-width: 1540px) and (min-width: 1367px) {
-  .azure-component.component-full .azure-inner {margin-top: 15px;}
-  .azure-component.component-full .azure-widget .amp-default-skin {width: 1066px !important; height: 600px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
-  .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
-  .azure-component.component-full iframe.removeazureie {width: 1066px !important; height: 600px !important; text-align: center; display: inline-block; position: relative;}
+  .azure.is-full .azure__inner {margin-top: 15px;}
+  .azure.is-full .azure__widget .amp-default-skin {width: 1066px !important; height: 600px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
+  .azure.is-full .embed-container {padding-bottom: 36.25%;}
+  .azure.is-full iframe.removeazureie {width: 1066px !important; height: 600px !important; text-align: center; display: inline-block; position: relative;}
+  .azure.is-full .azure__transcript-container {display: flex; justify-content: center; flex-wrap: wrap;}
+  .azure.is-full .azure__transcript-btn {max-width: 1066px;}
 }
 @media (max-width: 1366px) and (min-width: 1025px) {
-  .azure-component.component-full .azure-widget .amp-default-skin {width: 853px !important; height: 480px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
-  .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
-  .azure-component.component-full iframe.removeazureie {width: 853px !important; height: 480px !important; text-align: center; display: inline-block; position: relative;}
+  .azure.is-full .azure__widget .amp-default-skin {width: 853px !important; height: 480px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
+  .azure.is-full .embed-container {padding-bottom: 36.25%;}
+  .azure.is-full iframe.removeazureie {width: 853px !important; height: 480px !important; text-align: center; display: inline-block; position: relative;}
+  .azure.is-full .azure__transcript-container {display: flex; justify-content: center; flex-wrap: wrap;}
+  .azure.is-full .azure__transcript-btn {max-width: 853px;}
 }

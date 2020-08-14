@@ -1,43 +1,49 @@
-<div class="azure-inner component-inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
+{{import_globals}}
+<div class="azure__inner component__inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
+
   {{> component this}}
-  <div class="azure-widget component-widget">
+
+  {{#any _transcript._externalTranscript _transcript._inlineTranscript}}
+  <button class="aria-label js-skip-to-transcript" tabindex="-1" aria-label="{{_globals._components._azure.skipToTranscript}}"></button>
+  {{/any}}
+
+  <div class="azure__widget component__widget">
 
     <iframe tabindex="0" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}{{else}}{{/if}}&autoplay={{_media._autoplay}}&fullscreen={{_media._setFullscreen}}&controls={{_media._controls}}&poster={{_media._poster}}&scrubber={{_media._scrubber}}" id="{{_id}}" class="removeazureie" name="azuremediaplayer" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
 
   </div>
   
   {{#if _transcript}}
-    <div class="azure-transcript-container">
+    <div class="azure__transcript-container">
 
-      <div class="azure-transcript-button-container">
         {{#if _transcript._inlineTranscript}}
-          <button class="azure-inline-transcript-button button" tabindex="0" role="button">
-            <div class="transcript-text-container" tabindex="0">
+          <button class="azure__transcript-btn-inline azure__transcript-btn js-media-inline-transcript-toggle" aria-expanded="false">
+            <span class="media__transcript-btn-text">
               {{#if _transcript.inlineTranscriptButton}}
-                {{_transcript.inlineTranscriptButton}}
+              {{_transcript.inlineTranscriptButton}}
               {{else}}
-                {{_transcript.transcriptLink}}
+              {{_transcript.transcriptLink}}
               {{/if}}
-            </div>
+            </span>
           </button>
         {{/if}}
+
         {{#if _transcript._externalTranscript}}
-          <button onclick="window.open('{{_transcript.transcriptLink}}')" class="azure-external-transcript-button button" tabindex="0" role="button">
-            <div class="transcript-text-container">
+          <button class="azure__transcript-btn-external azure__transcript-btn js-media-external-transcript-click" onclick="window.open('{{_transcript.transcriptLink}}')">
+            <span class="media__transcript-btn-text">
               {{#if _transcript.transcriptLinkButton}}
-                {{_transcript.transcriptLinkButton}}
+              {{_transcript.transcriptLinkButton}}
               {{else}}
-                {{_transcript.transcriptLink}}
+              {{_transcript.transcriptLink}}
               {{/if}}
-            </div>
+            </span>
           </button>
         {{/if}}
-        </div>
 
         {{#if _transcript._inlineTranscript}}
-          <div class="azure-inline-transcript-body-container">
-            <div class="azure-inline-transcript-body" tabindex="0">
-            {{{a11y_text _transcript.inlineTranscriptBody}}}
+          <div class="azure__transcript-body-inline" role="region" aria-label="{{#if _transcript.inlineTranscriptButton}}{{_transcript.inlineTranscriptButton}}{{else}}{{_transcript.transcriptLink}}{{/if}}">
+            <div class="azure__transcript-body-inline-inner">
+              {{{compile _transcript.inlineTranscriptBody}}}
             </div>
           </div>
         {{/if}}
