@@ -158,6 +158,7 @@ define([
         onToggleInlineTranscript: function(event) {
             if (event) event.preventDefault();
             var $transcriptBodyContainer = this.$(".azure__transcript-body-inline");
+            var $transcriptBodyContainerInner = this.$(".azure__transcript-body-inline-inner");
             var $button = this.$(".azure__transcript-btn-inline");
 
             if ($transcriptBodyContainer.hasClass("inline-transcript-open")) {
@@ -169,7 +170,8 @@ define([
             } else {
                 $transcriptBodyContainer.slideDown(function() {
                     $(window).resize();
-                }).a11y_focus();
+                });
+                $transcriptBodyContainerInner.a11y_focus();
                 $transcriptBodyContainer.addClass("inline-transcript-open");
                 $button.html(this.model.get("_transcript").inlineTranscriptCloseButton);
                 if (this.model.get('_transcript')._setCompletionOnView !== false) {
