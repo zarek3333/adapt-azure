@@ -41,8 +41,8 @@
         {{/if}}
 
         {{#if _transcript._inlineTranscript}}
-          <div class="azure__transcript-body-inline" role="region" aria-label="{{#if _transcript.inlineTranscriptButton}}{{_transcript.inlineTranscriptButton}}{{else}}{{_transcript.transcriptLink}}{{/if}}" {{#if _transcript.inlineTranscriptButton}}tabindex="0"{{/if}}>
-            <div class="azure__transcript-body-inline-inner">
+          <div class="azure__transcript-body-inline" role="region" aria-label="{{#if _transcript.inlineTranscriptButton}}{{_transcript.inlineTranscriptButton}}{{else}}{{_transcript.transcriptLink}}{{/if}}">
+            <div class="azure__transcript-body-inline-inner" {{#if _transcript.inlineTranscriptButton}}tabindex="0"{{/if}}>
               {{{compile _transcript.inlineTranscriptBody}}}
             </div>
           </div>
