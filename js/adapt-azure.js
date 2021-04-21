@@ -17,18 +17,22 @@ define([
                 player:null
             }
         },
-        events: {
-            "click .azure__transcript-btn-inline": "onToggleInlineTranscript",
-            "click .js-skip-to-transcript": "onSkipToTranscript"
+        events: function() {
+            return Adapt.device.touch == true ? {
+                'inview': 'onEnded',
+                'click .azure__transcript-btn-inline': 'onToggleInlineTranscript',
+                'click .js-skip-to-transcript': 'onSkipToTranscript'
+            } : {
+                'mousemove': 'onEnded',
+                'click .azure__transcript-btn-inline': 'onToggleInlineTranscript',
+                'click .js-skip-to-transcript': 'onSkipToTranscript'
+            }
         },
 
         initialize: function() {
             ComponentView.prototype.initialize.apply(this);
 
             _.bindAll(this, 'onInview', 'onPlay', 'onEnded' );
-
-            /* CSS FOR AZURE PLAYER <link rel="stylesheet" href="//amp.azure.net/libs/amp/1.8.3/skins/amp-default/azuremediaplayer.min.css"> */
-            /* JAVASCRIPT FOR AZURE PLAYER <script src="//amp.azure.net/libs/amp/1.8.3/azuremediaplayer.min.js"></script>*/
 
             if (window.onAzureIframeAPIReady === undefined) {
                 window.onAzureIframeAPIReady = function() {
@@ -134,8 +138,8 @@ define([
         
         //Will not track properly if using same video source
         onEnded: function(event, visible, visiblePartX, visiblePartY) {
-             var currentazureon = this.model.get('_id');
-             $('.' + currentazureon + ' .removeazureie').addClass('azureendmode');
+            var currentazureon = this.model.get('_id');
+            $('.' + currentazureon + ' .removeazureie').addClass('azureendmode');
             if (visible) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
@@ -152,6 +156,9 @@ define([
                         this.setCompletionStatus();
                     }
                 }
+            }
+            if ( $('.' + currentazureon + ' .azureendmode').hasClass('vjs-ended')) {
+                this.setCompletionStatus();
             }
         },
         
