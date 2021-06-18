@@ -17,8 +17,8 @@
     <div class="azure__transcript-container">
 
         {{#if _transcript._inlineTranscript}}
-          <button class="azure__transcript-btn-inline azure__transcript-btn js-media-inline-transcript-toggle" aria-expanded="false">
-            <span class="media__transcript-btn-text">
+          <button class="azure__transcript-btn-inline azure__transcript-btn js-azure-inline-transcript-toggle" aria-expanded="false">
+            <span class="azure__transcript-btn-text">
               {{#if _transcript.inlineTranscriptButton}}
               {{_transcript.inlineTranscriptButton}}
               {{else}}
@@ -29,8 +29,8 @@
         {{/if}}
 
         {{#if _transcript._externalTranscript}}
-          <button class="azure__transcript-btn-external azure__transcript-btn js-media-external-transcript-click" onclick="window.open('{{_transcript.transcriptLink}}')">
-            <span class="media__transcript-btn-text">
+          <button class="azure__transcript-btn-external azure__transcript-btn js-azure-external-transcript-click" onclick="window.open('{{_transcript.transcriptLink}}')">
+            <span class="azure__transcript-btn-text">
               {{#if _transcript.transcriptLinkButton}}
               {{_transcript.transcriptLinkButton}}
               {{else}}
