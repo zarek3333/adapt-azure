@@ -20,11 +20,13 @@ define([
         events: function() {
             return Adapt.device.touch == true ? {
                 'inview': 'onEnded',
-                'click .azure__transcript-btn-inline': 'onToggleInlineTranscript',
+                'click .js-azure-inline-transcript-toggle': 'onToggleInlineTranscript',
+                'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
             } : {
                 'mousemove': 'onEnded',
                 'click .azure__transcript-btn-inline': 'onToggleInlineTranscript',
+                'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
             }
         },
@@ -89,7 +91,9 @@ define([
         },
 
         onSkipToTranscript: function() {
-            this.$('.azure__transcript-container button').a11y_focus();
+            _.delay(function() {
+                this.$('.azure__transcript-btn').a11y_focus();
+            }.bind(this), 250);
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
@@ -162,31 +166,41 @@ define([
             }
         },
         
-        onToggleInlineTranscript: function(event) {
-            if (event) event.preventDefault();
-            var $transcriptBodyContainer = this.$(".azure__transcript-body-inline");
-            var $transcriptBodyContainerInner = this.$(".azure__transcript-body-inline-inner");
-            var $button = this.$(".azure__transcript-btn-inline");
+        onToggleInlineTranscript: function(e) {
+          if (e && e.preventDefault) e.preventDefault();
 
-            if ($transcriptBodyContainer.hasClass("inline-transcript-open")) {
-                $transcriptBodyContainer.slideUp(function() {
-                    $(window).resize();
-                });
-                $transcriptBodyContainer.removeClass("inline-transcript-open");
-                $button.attr('aria-expanded', false);
-                $button.html(this.model.get("_transcript").inlineTranscriptButton);
-            } else {
-                $transcriptBodyContainer.slideDown(function() {
-                    $(window).resize();
-                });
-                $transcriptBodyContainerInner.a11y_focus();
-                $transcriptBodyContainer.addClass("inline-transcript-open");
-                $button.attr('aria-expanded', true);
-                $button.html(this.model.get("_transcript").inlineTranscriptCloseButton);
-                if (this.model.get('_transcript')._setCompletionOnView !== false) {
-                    this.setCompletionStatus();
-                }
-            }
+          var $transcriptBodyContainer = this.$('.azure__transcript-body-inline');
+          var $transcriptBodyContainerInner = this.$(".azure__transcript-body-inline-inner");
+          var $button = this.$('.azure__transcript-btn-inline');
+          var $buttonText = $button.find('.azure__transcript-btn-text');
+
+          if ($transcriptBodyContainer.hasClass('inline-transcript-open')) {
+            $transcriptBodyContainer.stop(true, true).slideUp(function() {
+              $(window).resize();
+            }).removeClass('inline-transcript-open');
+
+            $button.attr('aria-expanded', false);
+            $buttonText.html(this.model.get('_transcript').inlineTranscriptButton);
+
+            return;
+          }
+
+          $transcriptBodyContainer.stop(true, true).slideDown(function() {
+            $(window).resize();
+          }).addClass('inline-transcript-open');
+          $transcriptBodyContainerInner.a11y_focus();
+          $button.attr('aria-expanded', true);
+          $buttonText.html(this.model.get('_transcript').inlineTranscriptCloseButton);
+
+          if (this.model.get('_transcript')._setCompletionOnView !== false) {
+            this.setCompletionStatus();
+          }
+        },
+
+        onExternalTranscriptClicked: function() {
+          if (this.model.get('_transcript')._setCompletionOnView !== false) {
+            this.setCompletionStatus();
+          }
         },
 
         onAzureIframeAPIReady: function() {
