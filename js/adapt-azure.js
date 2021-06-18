@@ -114,6 +114,9 @@ define([
                     if ( $('.' + currentazureon + ' .removeazureie').hasClass('azureinviewmode') ) {
                         this.setCompletionStatus();
                     }
+                    if ( $('html').hasClass('accessibility') ) {
+                        $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
+                    }
                 }
             }
         },
@@ -135,6 +138,9 @@ define([
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     if ( $('.' + currentazureon + ' .azureplaymode').hasClass('vjs-has-started') ) {
                         this.setCompletionStatus();
+                    }
+                    if ( $('html').hasClass('accessibility') ) {
+                        $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
                     }
                 }
             }
@@ -158,6 +164,9 @@ define([
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     if ( $('.' + currentazureon + ' .azureendmode').hasClass('vjs-ended')) {
                         this.setCompletionStatus();
+                    }
+                    if ( $('html').hasClass('accessibility') ) {
+                        $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
                     }
                 }
             }
