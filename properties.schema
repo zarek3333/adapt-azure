@@ -12,10 +12,10 @@
       "validators": [],
       "translatable": true
     },
-    "transcriptButton": {
+    "skipToTranscript": {
       "type": "string",
-      "required": false,
-      "default": "Alternatively you can select the link below for the transcript.",
+      "required": true,
+      "default": "Skip to transcript",
       "inputType": "Text",
       "validators": [],
       "translatable": true
