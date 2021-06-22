@@ -1,5 +1,5 @@
 {{import_globals}}
-<div class="azure__inner component__inner"  role="region" aria-label="{{_globals._components._azure.ariaRegion}}">
+<div class="azure__inner component__inner" aria-label="{{_globals._components._azure.ariaRegion}}">
 
   {{> component this}}
 
@@ -41,7 +41,7 @@
         {{/if}}
 
         {{#if _transcript._inlineTranscript}}
-          <div class="azure__transcript-body-inline" role="region" aria-label="{{#if _transcript.inlineTranscriptButton}}{{_transcript.inlineTranscriptButton}}{{else}}{{_transcript.transcriptLink}}{{/if}}">
+          <div class="azure__transcript-body-inline" aria-label="{{#if _transcript.inlineTranscriptButton}}{{_transcript.inlineTranscriptButton}}{{else}}{{_transcript.transcriptLink}}{{/if}}">
             <div class="azure__transcript-body-inline-inner" {{#if _transcript.inlineTranscriptButton}}tabindex="0"{{/if}}>
               {{{compile _transcript.inlineTranscriptBody}}}
             </div>
