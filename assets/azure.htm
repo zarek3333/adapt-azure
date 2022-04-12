@@ -331,8 +331,8 @@ if(daScrubber === "no-scrubber"){
 
 if(daCaponoff === "true"){
     setTimeout(function () {
-       this.$('.vjs-captions-button .vjs-menu-item[aria-label="Captions Off"]').trigger('click');
-    }, 1000);
+       this.$('.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-checked="false"]').trigger('click');
+    }, 2999);
     console.log("Azure has captions turned off by default");
 } else{
   //do nothing
