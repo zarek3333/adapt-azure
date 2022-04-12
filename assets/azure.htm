@@ -39,6 +39,23 @@
             .azure-component.component-full .azure-widget .amp-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
             .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
         }
+        .amp-default-skin .vjs-text-track-display {
+          opacity: 0;
+          -webkit-animation: 5s ease 0s normal forwards 1 azurefadein;
+          animation: 5s ease 0s normal forwards 1 azurefadein;
+        }
+
+        @keyframes azurefadein{
+          0% { opacity:0; }
+          66% { opacity:0; }
+          100% { opacity:1; }
+        }
+
+        @-webkit-keyframes azurefadein{
+          0% { opacity:0; }
+          66% { opacity:0; }
+          100% { opacity:1; }
+        }
     </style>
 </head>
 <body style="overflow: hidden; margin: 0px;">
