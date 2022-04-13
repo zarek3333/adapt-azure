@@ -3,9 +3,12 @@
 
   {{> component this}}
 
-  {{#any _transcript._externalTranscript _transcript._inlineTranscript}}
+  {{#if _transcript._inlineTranscript}}
   <button class="aria-label js-skip-to-transcript" tabindex="-1"></button>
-  {{/any}}
+  {{/if}}
+  {{#if _transcript._externalTranscript}}
+  <button class="aria-label js-skip-to-transcript" tabindex="-1"></button>
+  {{/if}}
 
   <div class="azure__widget component__widget">
 
