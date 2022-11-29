@@ -20,11 +20,13 @@ define([
         events: function() {
             return Adapt.device.touch == true ? {
                 'inview': 'onEnded',
+                'inview': 'trackplayAMP',
                 'click .js-azure-inline-transcript-toggle': 'onToggleInlineTranscript',
                 'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
             } : {
                 'mousemove': 'onEnded',
+                'mousemove': 'trackplayAMP',
                 'click .azure__transcript-btn-inline': 'onToggleInlineTranscript',
                 'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
@@ -114,10 +116,6 @@ define([
                     this.$('.component__inner').off('inview');
                     if ( $('.' + currentazureon + ' .removeazureie').hasClass('azureinviewmode') ) {
                         this.setCompletionStatus();
-                        //Trigger PAUSE button from outside the iframe
-                        _.delay(function() {
-                            $('iframe.vjs-has-started:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
-                        }, 502);
                     }
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
@@ -143,10 +141,6 @@ define([
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     if ( $('.' + currentazureon + ' .azureplaymode').hasClass('vjs-has-started') ) {
                         this.setCompletionStatus();
-                        //Trigger PAUSE button from outside the iframe
-                        _.delay(function() {
-                            $('iframe.vjs-has-started:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
-                        }, 502);
                     }
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
@@ -172,10 +166,6 @@ define([
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     $(checkForChanges);
-                    //Trigger PAUSE button from outside the iframe
-                    _.delay(function() {
-                        $('iframe.vjs-has-started:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
-                    }, 502);
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
                     }
@@ -188,6 +178,14 @@ define([
                 } else {
                     setTimeout(checkForChanges, 500);
                 }
+            }
+        },
+
+        trackplayAMP: function() {
+            var currentazureon = this.model.get('_id');
+            //Trigger PAUSE button from outside the iframe
+            if ( $('.' + currentazureon + ' .removeazureie').hasClass('vjs-playing') ) {
+                $('iframe:not(#' + currentazureon + ').vjs-playing:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
             }
         },
         
@@ -244,7 +242,6 @@ define([
         template: 'azure'
     });
     
-    //Adapt.register("azure", azure );
     Adapt.register('azure', {
       model: ComponentModel.extend({}), // register the model, it should be an extension of ComponentModel, an empty extension is fine
       view: Azure
