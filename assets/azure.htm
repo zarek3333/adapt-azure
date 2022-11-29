@@ -121,6 +121,8 @@ var daControls = qs("controls") == "true" ? true : false;
 var daFullscreen = qs("fullscreen") == "true" ? true : false;
 var daPoster = qs("poster");
 
+this.$("video.azuremediaplayer").attr('name', window.name);
+
 if(sCap === null || sCap === undefined || sCap === "" ){
   var myOptions = {
     "nativeControlsForTouch": false,
@@ -130,7 +132,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     height: "100%",
     poster: "../"+ daPoster,
     logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "seekStep": 0, "volumeStep": 5 },
+    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
   }
   myPlayer = amp("azuremediaplayer", myOptions);
   myPlayer.src([
@@ -140,12 +142,16 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
   ]);
   myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-has-started');
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').addClass('vjs-ended');
+  });
+  myPlayer.addEventListener(amp.eventName.pause, function(){
+    console.log("Video has been paused! " + window.name );
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-paused');
   });
   if(daFullscreen == false){
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
@@ -162,7 +168,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     height: "100%",
     poster: "../"+ daPoster,
     logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "seekStep": 0, "volumeStep": 5 },
+    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
     "language": "fr",
   }
   myPlayer = amp("azuremediaplayer", myOptions);
@@ -198,12 +204,16 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     setTrack("fr", "captions");
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-has-started');
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').addClass('vjs-ended');
+  });
+  myPlayer.addEventListener(amp.eventName.pause, function(){
+    console.log("Video has been paused! " + window.name );
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-paused');
   });
   if(daFullscreen == false){
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
@@ -220,7 +230,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     height: "100%",
     poster: "../"+ daPoster,
     logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "seekStep": 0, "volumeStep": 5 },
+    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
     "language": "es",
   }
   myPlayer = amp("azuremediaplayer", myOptions);
@@ -256,12 +266,16 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     setTrack("es", "captions");
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-has-started');
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').addClass('vjs-ended');
+  });
+  myPlayer.addEventListener(amp.eventName.pause, function(){
+    console.log("Video has been paused! " + window.name );
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-paused');
   });
   if(daFullscreen == false){
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
@@ -278,7 +292,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     height: "100%",
     poster: "../"+ daPoster,
     logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "seekStep": 0, "volumeStep": 5 },
+    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
     "language": "it",
   }
   myPlayer = amp("azuremediaplayer", myOptions);
@@ -314,12 +328,16 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     setTrack("it", "captions");
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-has-started');
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').addClass('vjs-ended');
+  });
+  myPlayer.addEventListener(amp.eventName.pause, function(){
+    console.log("Video has been paused! " + window.name );
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-paused');
   });
   if(daFullscreen == false){
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
@@ -336,7 +354,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     height: "100%",
     poster: "../"+ daPoster,
     logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "seekStep": 0, "volumeStep": 5 },
+    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
     "language": "en",
   }
   myPlayer = amp("azuremediaplayer", myOptions);
@@ -372,12 +390,16 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     setTrack("en", "captions");
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-has-started');
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').addClass('vjs-ended');
+  });
+  myPlayer.addEventListener(amp.eventName.pause, function(){
+    console.log("Video has been paused! " + window.name );
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).addClass('vjs-paused');
   });
   if(daFullscreen == false){
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');

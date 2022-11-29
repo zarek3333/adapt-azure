@@ -46,8 +46,9 @@ define([
         },
 
         preRender: function() {
-            this.listenTo(Adapt, 'device:resize', this.setIFrameSize);
-            this.listenTo(Adapt, 'device:changed', this.setIFrameSize);
+            this.listenTo(Adapt, {
+              'device:resize device:changed': this.setIFrameSize
+            });
         },
 
         setIFrameSize: function () {
@@ -113,6 +114,10 @@ define([
                     this.$('.component__inner').off('inview');
                     if ( $('.' + currentazureon + ' .removeazureie').hasClass('azureinviewmode') ) {
                         this.setCompletionStatus();
+                        //Trigger PAUSE button from outside the iframe
+                        _.delay(function() {
+                            $('iframe.vjs-has-started:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
+                        }, 502);
                     }
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
@@ -138,6 +143,10 @@ define([
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     if ( $('.' + currentazureon + ' .azureplaymode').hasClass('vjs-has-started') ) {
                         this.setCompletionStatus();
+                        //Trigger PAUSE button from outside the iframe
+                        _.delay(function() {
+                            $('iframe.vjs-has-started:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
+                        }, 502);
                     }
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
@@ -163,6 +172,10 @@ define([
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     $(checkForChanges);
+                    //Trigger PAUSE button from outside the iframe
+                    _.delay(function() {
+                        $('iframe.vjs-has-started:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
+                    }, 502);
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
                     }
