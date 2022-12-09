@@ -35,13 +35,13 @@
         }
         .amp-default-skin.nofullscreen .vjs-fullscreen-control {display: none;}
         .noscrubber .amp-default-skin .vjs-progress-holder .vjs-play-progress, .noscrubber .amp-default-skin .vjs-progress-holder .vjs-load-progress, .noscrubber .amp-default-skin .vjs-progress-holder .vjs-load-progress div, .noscrubber .amp-default-skin .vjs-progress-control, .noscrubber .amp-default-skin .vjs-slider-handle, .noscrubber .amp-default-skin .vjs-progress-control .vjs-mouse-display, .noscrubber .amp-default-skin .vjs-progress-holder {display:none;}
-        .vjs-captions-button .vjs-menu-item {text-transform: capitalize;}
-        .vjs-captions-button .vjs-menu-item[aria-label="english"], .vjs-captions-button .vjs-menu-item[aria-label="french"], .vjs-captions-button .vjs-menu-item[aria-label="spanish"], .vjs-captions-button .vjs-menu-item[aria-label="italian"] {
+        .vjs-captions-button .vjs-menu-item, .vjs-subtitles-button .vjs-menu-item {text-transform: capitalize;}
+        .vjs-captions-button .vjs-menu-item[aria-label="english"], .vjs-captions-button .vjs-menu-item[aria-label="french"], .vjs-captions-button .vjs-menu-item[aria-label="spanish"], .vjs-captions-button .vjs-menu-item[aria-label="italian"], .vjs-subtitles-button .vjs-menu-item[aria-label="english"], .vjs-subtitles-button .vjs-menu-item[aria-label="french"], .vjs-subtitles-button .vjs-menu-item[aria-label="spanish"], .vjs-subtitles-button .vjs-menu-item[aria-label="italian"] {
           color: transparent !important;
           line-height: 0 !important;
           font-size: 0px !important;
         }
-        .vjs-captions-button .vjs-menu-item[aria-label="english"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="french"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="spanish"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="italian"].vjs-selected:before {
+        .vjs-captions-button .vjs-menu-item[aria-label="english"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="french"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="spanish"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="italian"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="english"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="french"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="spanish"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="italian"].vjs-selected:before {
           color: white !important;
           content: "\e62c ";
           font-size: 8px !important;
@@ -98,6 +98,50 @@
           display: inline-block;
           color: white !important;
         }
+        .vjs-subtitles-button .vjs-menu-item[aria-label="english"]:after {
+          content: "Subtitles On" !important;
+          font-size: 11px !important;
+          font-weight: normal;
+          height: auto;
+          width: auto;
+          line-height: 14px !important;
+          text-indent: 0px;
+          display: inline-block;
+          color: white !important;
+        }
+        .vjs-subtitles-button .vjs-menu-item[aria-label="french"]:after {
+          content: "Sous-Titres Activés" !important;
+          font-size: 11px !important;
+          font-weight: normal;
+          height: auto;
+          width: auto;
+          line-height: 14px !important;
+          text-indent: 0px;
+          display: inline-block;
+          color: white !important;
+        }
+        .vjs-subtitles-button .vjs-menu-item[aria-label="spanish"]:after {
+          content: "Subtítulos Activados" !important;
+          font-size: 11px !important;
+          font-weight: normal;
+          height: auto;
+          width: auto;
+          line-height: 14px !important;
+          text-indent: 0px;
+          display: inline-block;
+          color: white !important;
+        }
+        .vjs-subtitles-button .vjs-menu-item[aria-label="italian"]:after {
+          content: "Sottotitoli On" !important;
+          font-size: 11px !important;
+          font-weight: normal;
+          height: auto;
+          width: auto;
+          line-height: 14px !important;
+          text-indent: 0px;
+          display: inline-block;
+          color: white !important;
+        }
         @media (max-width: 1366px) and (min-width: 1280px) {
             .azure-component.component-full .azure-widget .amp-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
             .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
@@ -114,6 +158,7 @@
 <script>
 var sVidUrl = qs("url");
 var sCap = qs("captions");
+var sKind = qs("kind");
 var daScrubber = qs("scrubber");
 var daCaponoff = qs("caponoff");
 var daAutoplay = qs("autoplay") == "true" ? true : false;
@@ -183,7 +228,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
                   "src": RevsCap,
                   "srclang": "fr",
                   "label": "french",
-                  "kind": "captions"
+                  "kind": sKind
           }
   ]);
 
@@ -201,22 +246,22 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
       }
   myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
-    setTrack("fr", "captions");
+    setTrack("fr", sKind);
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
   });
   myPlayer.addEventListener(amp.eventName.pause, function(){
     console.log("Video has been paused! " + window.name );
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=french,fr,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 } else if (sCap.indexOf('spanish,es,') >= 0) {
@@ -245,7 +290,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
                   "src": RevsCap,
                   "srclang": "es",
                   "label": "spanish",
-                  "kind": "captions"
+                  "kind": sKind
           }
   ]);
 
@@ -263,22 +308,22 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
       }
   myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
-    setTrack("es", "captions");
+    setTrack("es", sKind);
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
   });
   myPlayer.addEventListener(amp.eventName.pause, function(){
     console.log("Video has been paused! " + window.name );
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=spanish,es,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 } else if (sCap.indexOf('italian,it,') >= 0) {
@@ -307,7 +352,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
                   "src": RevsCap,
                   "srclang": "it",
                   "label": "italian",
-                  "kind": "captions"
+                  "kind": sKind
           }
   ]);
 
@@ -325,22 +370,22 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
       }
   myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
-    setTrack("it", "captions");
+    setTrack("it", sKind);
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
   });
   myPlayer.addEventListener(amp.eventName.pause, function(){
     console.log("Video has been paused! " + window.name );
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=italian,it,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 }else{
@@ -369,7 +414,7 @@ if(sCap === null || sCap === undefined || sCap === "" ){
                   "src": RevsCap,
                   "srclang": "en",
                   "label": "english",
-                  "kind": "captions"
+                  "kind": sKind
           }
   ]);
 
@@ -387,22 +432,22 @@ if(sCap === null || sCap === undefined || sCap === "" ){
           }
       }
   myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
-    setTrack("en", "captions");
+    setTrack("en", sKind);
   });
   myPlayer.addEventListener(amp.eventName.play, function(){
     console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
   });
   myPlayer.addEventListener(amp.eventName.ended, function(){
     console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
   });
   myPlayer.addEventListener(amp.eventName.pause, function(){
     console.log("Video has been paused! " + window.name );
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
   });
   if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
+    $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
 }
@@ -420,6 +465,10 @@ if(daCaponoff === "true"){
     $('head').append('<style type="text/css">.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="french"]:before {opacity: 0}</style>');
     $('head').append('<style type="text/css">.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="spanish"]:before {opacity: 0}</style>');
     $('head').append('<style type="text/css">.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]:before {opacity: 0}</style>');
+    $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]:before {opacity: 0}</style>');
+    $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="french"]:before {opacity: 0}</style>');
+    $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="spanish"]:before {opacity: 0}</style>');
+    $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]:before {opacity: 0}</style>');
     this.$('.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]').click(function() {
       $('.amp-default-skin .vjs-text-track-display').show();
       $('head').append('<style type="text/css">.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]:before {opacity: 1}</style>');
@@ -435,6 +484,22 @@ if(daCaponoff === "true"){
     this.$('.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]').click(function() {
       $('.amp-default-skin .vjs-text-track-display').show();
       $('head').append('<style type="text/css">.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]:before {opacity: 1}</style>');
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]').click(function() {
+      $('.amp-default-skin .vjs-text-track-display').show();
+      $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]:before {opacity: 1}</style>');
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="french"]').click(function() {
+      $('.amp-default-skin .vjs-text-track-display').show();
+      $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="french"]:before {opacity: 1}</style>');
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="spanish"]').click(function() {
+      $('.amp-default-skin .vjs-text-track-display').show();
+      $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="spanish"]:before {opacity: 1}</style>');
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]').click(function() {
+      $('.amp-default-skin .vjs-text-track-display').show();
+      $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]:before {opacity: 1}</style>');
     });
     //For CC in Accessibility on return key
     this.$('.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]').keydown(function (e) {
@@ -459,6 +524,30 @@ if(daCaponoff === "true"){
         if (e.which == 13) {
           $('.amp-default-skin .vjs-text-track-display').show();
           $('head').append('<style type="text/css">.vjs-captions-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]:before {opacity: 1}</style>');
+        }
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]').keydown(function (e) {
+        if (e.which == 13) {
+          $('.amp-default-skin .vjs-text-track-display').show();
+          $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="english"]:before {opacity: 1}</style>');
+        }
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="french"]').keydown(function (e) {
+        if (e.which == 13) {
+          $('.amp-default-skin .vjs-text-track-display').show();
+          $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="french"]:before {opacity: 1}</style>');
+        }
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="spanish"]').keydown(function (e) {
+        if (e.which == 13) {
+          $('.amp-default-skin .vjs-text-track-display').show();
+          $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="spanish"]:before {opacity: 1}</style>');
+        }
+    });
+    this.$('.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]').keydown(function (e) {
+        if (e.which == 13) {
+          $('.amp-default-skin .vjs-text-track-display').show();
+          $('head').append('<style type="text/css">.vjs-subtitles-button .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="italian"]:before {opacity: 1}</style>');
         }
     });
 } else{
