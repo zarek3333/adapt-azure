@@ -83,39 +83,49 @@
           "type":"string",
           "required":false,
           "default": "",
-          "title": "Closed Captions Source URL example: ms01.streaming.mediaservices.windows.net/abc123-123abc-wrds456/MP1.vtt",
+          "title": "Closed Captions or Subtitle URL example: ms01.streaming.mediaservices.windows.net/abc123-123abc-wrds456/MP1.vtt",
           "inputType": "Text",
           "validators": [],
-          "help": "The 'embed' closed captions URL including the vtt file for the Azure video you want to be displayed (DON'T INCLUDE HTTP:// OR HTTPS://)"
+          "help": "The 'embed' closed captions or subtitle URL including the vtt file for the Azure video you want to be displayed (DON'T INCLUDE HTTP:// OR HTTPS://)"
         },
         "_captiononauto": {
           "type":"boolean",
           "required":false,
           "default": false,
-          "title": "Turn caption off by default",
+          "title": "Turn captions/subtitles off by default",
           "inputType": {"type": "Boolean", "options": [true, false]},
           "validators": [],
-          "help": "This sets the video to load with captions off by default."
+          "help": "This sets the video to load with captions/subtitles off by default."
         },
         "_srclang": {
           "type": "string",
           "required": false,
           "enum": ["en", "fr", "es", "it"],
           "inputType": {"type": "Select", "options": ["en", "fr", "es", "it"]},
-          "title": "Select Source of Closed Captions Language",
+          "title": "Select Source of Closed Captions or Subtitle Language",
           "default": "en",
           "validators": [],
-          "help": "Choose an sourse for the closed captions language"
+          "help": "Choose the sourse for the closed captions or subtitles language"
         },
         "_caplabel": {
           "type": "string",
           "required": false,
           "enum": ["english", "french", "spanish", "italian"],
           "inputType": {"type": "Select", "options": ["english", "french", "spanish", "italian"]},
-          "title": "Select Closed Captions Language",
+          "title": "Select Closed Captions or Subtitle Language",
           "default": "english",
           "validators": [],
-          "help": "Choose an the language for you closed captions"
+          "help": "Choose the language for you closed captions or subtitles"
+        },
+        "_capkind": {
+          "type": "string",
+          "required": false,
+          "enum": ["captions", "subtitles"],
+          "inputType": {"type": "Select", "options": ["captions", "subtitles"]},
+          "title": "Closed Captions or Subtitles?",
+          "default": "captions",
+          "validators": [],
+          "help": "Choose the kind of file closed captions or subtitles"
         },
         "_controls": {
           "type":"boolean",
