@@ -2,7 +2,7 @@
     "name": "adapt-azure",
     "repository": "git://github.com/mike-st/adapt-azure.git",
     "framework": ">=5.0.0",
-    "version": "5.4.6",
+    "version": "5.4.7",
     "homepage": "https://github.com/mike-st/adapt-azure",
     "displayName": "Azure Player",
     "component": "azure",
