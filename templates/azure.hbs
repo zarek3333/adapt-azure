@@ -12,8 +12,11 @@
 
   <div class="azure__widget component__widget">
 
-    <iframe tabindex="0" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}&kind={{_media._capkind}}{{else}}{{/if}}&autoplay={{_media._autoplay}}&fullscreen={{_media._setFullscreen}}&controls={{_media._controls}}&poster={{_media._poster}}&scrubber={{_media._scrubber}}&caponoff={{_media._captiononauto}}" id="{{_id}}" class="removeazureie" name="azuremediaplayer-{{_id}}" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
-
+    {{#if _media._captions}}
+      <iframe tabindex="0" src="assets/azure.htm?url=//{{_media._source}}{{#if _media._captions}}&captions={{_media._caplabel}},{{_media._srclang}},//{{_media._captions}}&kind={{_media._capkind}}{{else}}{{/if}}&autoplay={{_media._autoplay}}&fullscreen={{_media._setFullscreen}}&controls={{_media._controls}}&poster={{_media._poster}}&scrubber={{_media._scrubber}}&caponoff={{_media._captiononauto}}" id="{{_id}}" class="removeazureie" name="azuremediaplayer-{{_id}}" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
+    {{else}}
+      <iframe tabindex="0" src="assets/azure2.htm?url=//{{_media._source}}&autoplay={{_media._autoplay}}&fullscreen={{_media._setFullscreen}}&controls={{_media._controls}}&poster={{_media._poster}}&scrubber={{_media._scrubber}}&caponoff={{_media._captiononauto}}" id="{{_id}}" class="removeazureie" name="azuremediaplayer-{{_id}}" scrolling="no" frameborder="no" align="center" height="280px" width="500px" allowfullscreen></iframe>
+    {{/if}}
   </div>
   
   {{#if _transcript}}
