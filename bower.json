@@ -2,14 +2,14 @@
     "name": "adapt-azure",
     "repository": "git://github.com/mike-st/adapt-azure.git",
     "framework": ">=5.0.0",
-    "version": "5.4.7",
+    "version": "5.5.0",
     "homepage": "https://github.com/mike-st/adapt-azure",
-    "displayName": "Azure Player",
+    "displayName": "API.Video Player",
     "component": "azure",
     "authors": [
         "Mike Stevens <mesgraphix@gmail.com>"
     ],
-    "description": "Azure Video Player. Works with framework 5.0+",
+    "description": "API.Video Player. Works with framework 5.0+",
     "main": "/js/adapt-azure.js",
     "assetFields": [
         "_media[]._poster"
