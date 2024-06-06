@@ -139,11 +139,17 @@ define([
                 }
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    if ( $('.' + currentazureon + ' .azureplaymode').hasClass('vjs-has-started') ) {
-                        this.setCompletionStatus();
-                    }
+                    $(checkForChanges1);
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
+                    }
+                }
+                var self = this;
+                function checkForChanges1() {
+                    if ($('.' + currentazureon + ' .azureplaymode').hasClass('vjs-has-started')) {
+                        self.setCompletionStatus();
+                    } else {
+                        setTimeout(checkForChanges1, 500);
                     }
                 }
             }
@@ -165,18 +171,18 @@ define([
                 }
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    $(checkForChanges);
+                    $(checkForChanges2);
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
                     }
                 }
             }
             var self = this;
-            function checkForChanges() {
+            function checkForChanges2() {
                 if ($('.' + currentazureon + ' .azureendmode').hasClass('vjs-ended')) {
                     self.setCompletionStatus();
                 } else {
-                    setTimeout(checkForChanges, 500);
+                    setTimeout(checkForChanges2, 500);
                 }
             }
         },

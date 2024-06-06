@@ -6,9 +6,17 @@
     <title>VUBIZ Media Player Embed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Azure Media Player 2.3.11 BUILT IN CC & SUBTITLES -->
-    <link href="//amp.azure.net/libs/amp/2.3.11/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
-    <script src="//amp.azure.net/libs/amp/2.3.11/azuremediaplayer.min.js"></script>
+    <!-- <link href="//amp.azure.net/libs/amp/2.3.11/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+    <script src="//amp.azure.net/libs/amp/2.3.11/azuremediaplayer.min.js"></script> -->
+    <link href="//vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <script src="../libraries/jquery.min.js"></script>
+    <script>
+      function qs(key) {
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+      }
+    </script>
     <style>
         html, body {
             height: 100%;
@@ -159,12 +167,21 @@
 <body style="overflow: hidden; margin: 0px;">
 <div class='embed-container'>
 
-      <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"></video>
-
+      <!-- <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"></video> -->
+      <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" data-setup="{}" height="100%" poster="" preload="auto" style="height: 100% !important; width: 100% !important;" width="100%" controls>
+          <source src="" type="application/x-mpegURL"/>
+      </video>
   </div>
 
 <script>
+this.$("video.azuremediaplayer").attr('name', window.name);
 var sVidUrl = qs("url");
+var sGUID = window.name;
+this.$('video[name="' + sGUID + '"] source').attr('src',sVidUrl);
+
+var daPoster = qs("poster");
+this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
+
 var sCap = qs("captions");
 var sKind = qs("kind");
 var daScrubber = qs("scrubber");
@@ -172,13 +189,24 @@ var daCaponoff = qs("caponoff");
 var daAutoplay = qs("autoplay") == "true" ? true : false;
 var daControls = qs("controls") == "true" ? true : false;
 var daFullscreen = qs("fullscreen") == "true" ? true : false;
-var daPoster = qs("poster");
 
-this.$("video.azuremediaplayer").attr('name', window.name);
+/* ON PLAY TRIGGER */
+document.getElementById('azuremediaplayer').addEventListener('play',startPlayer,false);
+function startPlayer(e) {
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started');
+};
+
+/* ON ENDED TRIGGER */
+document.getElementById('azuremediaplayer').addEventListener('ended',myPlayer,false);
+function myPlayer(e) {
+    console.log("Video has ended!");
+    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+};
     
-if(sCap === null || sCap === undefined || sCap === "" ){
+/*if(sCap === null || sCap === undefined || sCap === "" ){
   
-  var myOptions = {
+  /* var myOptions = {
     "nativeControlsForTouch": false,
     controls: daControls,
     autoplay: daAutoplay,
@@ -273,16 +301,16 @@ if(sCap === null || sCap === undefined || sCap === "" ){
     $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
   }
 
-}
+} */
 
-if(daScrubber === "no-scrubber"){
+/* if(daScrubber === "no-scrubber"){
     this.$(".embed-container").addClass("noscrubber");
     console.log("Azure has no scrubber");
 } else{
   //do nothing
-}
+} */
 
-if(daCaponoff === "true"){
+/* if(daCaponoff === "true"){
     $('.amp-default-skin .vjs-text-track-display').hide();
     $('head').append('<style type="text/css">.amp-default-skin .vjs-controls-enabled .vjs-big-play-button {width: 100% !important; height: 100% !important; background-color: transparent !important; border: none !important;}.amp-default-skin .vjs-controls-enabled .vjs-big-play-button:after {content: "";display: block;width: calc(.1em);height: calc(.1em); background-color: #3c454f; background-color: rgba(60,69,79,.7); border: 2px solid #384049; border-radius: 0; box-shadow: 0 0 1em rgba(255,255,255,.25); margin: 0px calc(50% - 0.05em);}</style>');
     this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
@@ -320,12 +348,11 @@ if(daCaponoff === "true"){
 } else{
   console.log("Azure has captions turned on by default");
 }
-
-function qs(key) {
-    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
-    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-}
+*/
+</script>
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script>
+    var player = videojs('azuremediaplayer');
 </script>
 <script type="text/javascript">
   document.getElementsByClassName("vjs-big-play-button[0]).addEventListener('click', () => { appInsights.trackEvent('homeVideo'); }");

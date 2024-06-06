@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>VUBIZ Media Player Embed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Azure Media Player 2.1.3 EXTERNAL VTT FILES FOR CC & SUBTITLES -->
-    <link href="//amp.azure.net/libs/amp/2.1.3/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
-    <script src="//amp.azure.net/libs/amp/2.1.3/azuremediaplayer.min.js"></script>
+    <!-- Azure Media Player 2.3.11 BUILT IN CC & SUBTITLES -->
+    <!-- <link href="//amp.azure.net/libs/amp/2.3.11/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+    <script src="//amp.azure.net/libs/amp/2.3.11/azuremediaplayer.min.js"></script> -->
+    <link href="//vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <script src="../libraries/jquery.min.js"></script>
+    <script>
+      function qs(key) {
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+      }
+    </script>
     <style>
         html, body {
             height: 100%;
@@ -159,12 +167,22 @@
 <body style="overflow: hidden; margin: 0px;">
 <div class='embed-container'>
 
-      <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"></video>
+      <!-- <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"></video> -->
+      <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" data-setup="{}" height="100%" poster="" preload="auto" style="height: 100% !important; width: 100% !important;" width="100%" controls>
+          <source src="" type="application/x-mpegURL"/>
+      </video>
 
   </div>
 
 <script>
+this.$("video.azuremediaplayer").attr('name', window.name);
 var sVidUrl = qs("url");
+var sGUID = window.name;
+this.$('video[name="' + sGUID + '"] source').attr('src',sVidUrl);
+
+var daPoster = qs("poster");
+this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
+
 var sCap = qs("captions");
 var sKind = qs("kind");
 var daScrubber = qs("scrubber");
@@ -172,11 +190,22 @@ var daCaponoff = qs("caponoff");
 var daAutoplay = qs("autoplay") == "true" ? true : false;
 var daControls = qs("controls") == "true" ? true : false;
 var daFullscreen = qs("fullscreen") == "true" ? true : false;
-var daPoster = qs("poster");
 
-this.$("video.azuremediaplayer").attr('name', window.name);
+/* ON PLAY TRIGGER */
+document.getElementById('azuremediaplayer').addEventListener('play',startPlayer,false);
+function startPlayer(e) {
+    console.log("Video has started! " + window.name);
+    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started');
+};
+
+/* ON ENDED TRIGGER */
+document.getElementById('azuremediaplayer').addEventListener('ended',myPlayer,false);
+function myPlayer(e) {
+    console.log("Video has ended!");
+    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+};
     
-if(sCap === null || sCap === undefined || sCap === "" ){
+/* if(sCap === null || sCap === undefined || sCap === "" ){
   
   var myOptions = {
     "nativeControlsForTouch": false,
@@ -506,12 +535,11 @@ if(daCaponoff === "true"){
 } else{
   console.log("Azure has captions turned on by default");
 }
-
-function qs(key) {
-    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
-    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-}
+*/
+</script>
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script>
+    var player = videojs('azuremediaplayer');
 </script>
 <script type="text/javascript">
   document.getElementsByClassName("vjs-big-play-button[0]).addEventListener('click', () => { appInsights.trackEvent('homeVideo'); }");
