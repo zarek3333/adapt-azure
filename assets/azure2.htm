@@ -63,7 +63,7 @@
 
       <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" data-setup="{}" height="100%" poster="" preload="auto" style="height: 100% !important; width: 100% !important;" width="100%" controls>
           <source src="" type="application/x-mpegURL"/>
-          <track srclang="" label="" kind="" src="">
+          <!-- <track srclang="" label="" kind="" src=""> -->
       </video>
   </div>
 
@@ -79,7 +79,7 @@ this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
 //CAPTIONS SPLITTING
 var sCap = qs("captions");
 var sKind = qs("kind");
-this.$('video[name="' + sGUID + '"] track').attr('kind', sKind);
+/* this.$('video[name="' + sGUID + '"] track').attr('kind', sKind);
 var arrayCap = sCap.split(",");
 var sCaplabel = arrayCap[0];
 this.$('video[name="' + sGUID + '"] track').attr('label', sCaplabel);
@@ -87,12 +87,13 @@ var sCaplang = arrayCap[1];
 this.$('video[name="' + sGUID + '"] track').attr('srclang', sCaplang);
 var sCapsrc = arrayCap[2];
 this.$('video[name="' + sGUID + '"] track').attr('src', sCapsrc);
+*/
 var daCaponoff = qs("caponoff");
-if(daCaponoff === "true" ){
+/*if(daCaponoff === "true" ){
   //do nothing
 } else {
   this.$('video[name="' + sGUID + '"] track').prop("default","true");
-}
+} */
 //CONTROLS ON/OFF
 var daControls = qs("controls"); //== "true" ? true : false;
 if(daControls === "false" ){
