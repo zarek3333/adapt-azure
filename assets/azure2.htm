@@ -38,128 +38,22 @@
           width: 100% !important;
           height: 100% !important;
         }
-        .amp-default-skin .vjs-poster img {
+        .vjs-default-skin .vjs-poster img {
             object-fit: cover;
             width: 100%;
         }
-        .amp-default-skin.nofullscreen .vjs-fullscreen-control {display: none;}
-        .noscrubber .amp-default-skin .vjs-progress-holder .vjs-play-progress, .noscrubber .amp-default-skin .vjs-progress-holder .vjs-load-progress, .noscrubber .amp-default-skin .vjs-progress-holder .vjs-load-progress div, .noscrubber .amp-default-skin .vjs-progress-control, .noscrubber .amp-default-skin .vjs-slider-handle, .noscrubber .amp-default-skin .vjs-progress-control .vjs-mouse-display, .noscrubber .amp-default-skin .vjs-progress-holder {display:none;}
+        .vjs-default-skin.nofullscreen .vjs-fullscreen-control {display: none;}
+        .noscrubber .vjs-default-skin .vjs-progress-holder .vjs-play-progress, .noscrubber .vjs-default-skin .vjs-progress-holder .vjs-load-progress, .noscrubber .vjs-default-skin .vjs-progress-holder .vjs-load-progress div, .noscrubber .vjs-default-skin .vjs-progress-control, .noscrubber .vjs-default-skin .vjs-slider-handle, .noscrubber .vjs-default-skin .vjs-progress-control .vjs-mouse-display, .noscrubber .vjs-default-skin .vjs-progress-holder, .nocontrols .vjs-default-skin .vjs-control-bar, .nofullmode .vjs-default-skin .vjs-fullscreen-control {display:none;}
         .vjs-captions-button .vjs-menu-item, .vjs-subtitles-button .vjs-menu-item {text-transform: capitalize;}
-        .vjs-captions-button .vjs-menu-item[aria-label="english"], .vjs-captions-button .vjs-menu-item[aria-label="french"], .vjs-captions-button .vjs-menu-item[aria-label="spanish"], .vjs-captions-button .vjs-menu-item[aria-label="italian"], .vjs-subtitles-button .vjs-menu-item[aria-label="english"], .vjs-subtitles-button .vjs-menu-item[aria-label="french"], .vjs-subtitles-button .vjs-menu-item[aria-label="spanish"], .vjs-subtitles-button .vjs-menu-item[aria-label="italian"], .amp-closedcaption-control .vjs-menu-item[aria-label="IMSC1"], .amp-subtitles-control .vjs-menu-item[aria-label="IMSC1"] {
-          color: transparent !important;
-          line-height: 0 !important;
-          font-size: 0px !important;
-        }
-        .vjs-captions-button .vjs-menu-item[aria-label="english"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="french"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="spanish"].vjs-selected:before, .vjs-captions-button .vjs-menu-item[aria-label="italian"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="english"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="french"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="spanish"].vjs-selected:before, .vjs-subtitles-button .vjs-menu-item[aria-label="italian"].vjs-selected:before, .amp-closedcaption-control .vjs-menu-item[aria-label="IMSC1"].vjs-selected:before, .amp-subtitles-control .vjs-menu-item[aria-label="IMSC1"].vjs-selected:before {
-          color: white !important;
-          content: "\e62c ";
-          font-size: 8px !important;
-          display: inline-block;
-          font-family: azuremediaplayer;
-          line-height: inherit !important;
-          margin-right: 4px;
-          padding-bottom: 5px;
-          vertical-align: middle;
-          height: 100%;
-          width: 10px;
-        }
-        .vjs-captions-button .vjs-menu-item[aria-label="english"]:after, .amp-closedcaption-control .vjs-menu-item[aria-label="IMSC1"]:after {
-          content: "Captions On" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-captions-button .vjs-menu-item[aria-label="french"]:after {
-          content: "Sous-Titrage Activé" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-captions-button .vjs-menu-item[aria-label="spanish"]:after {
-          content: "Subtítulos Activados" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-captions-button .vjs-menu-item[aria-label="italian"]:after {
-          content: "Didascalie su" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-subtitles-button .vjs-menu-item[aria-label="english"]:after, .amp-subtitles-control .vjs-menu-item[aria-label="IMSC1"]:after {
-          content: "Subtitles On" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-subtitles-button .vjs-menu-item[aria-label="french"]:after {
-          content: "Sous-Titres Activés" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-subtitles-button .vjs-menu-item[aria-label="spanish"]:after {
-          content: "Subtítulos Activados" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
-        .vjs-subtitles-button .vjs-menu-item[aria-label="italian"]:after {
-          content: "Sottotitoli On" !important;
-          font-size: 11px !important;
-          font-weight: normal;
-          height: auto;
-          width: auto;
-          line-height: 14px !important;
-          text-indent: 0px;
-          display: inline-block;
-          color: white !important;
-        }
         /* AMP NEW VER 2.3.11 CC/SUB TITLE FIX */
-        .amp-default-skin .vjs-text-track-display>div>div {
+        .vjs-default-skin .vjs-text-track-display>div>div {
             text-align: center !important;
         }
-        .amp-default-skin .vjs-text-track-display>div>div>div {
+        .vjs-default-skin .vjs-text-track-display>div>div>div {
             padding: 4px;
         }
         @media (max-width: 1366px) and (min-width: 1280px) {
-            .azure-component.component-full .azure-widget .amp-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
+            .azure-component.component-full .azure-widget .vjs-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
             .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
         }
     </style>
@@ -167,9 +61,9 @@
 <body style="overflow: hidden; margin: 0px;">
 <div class='embed-container'>
 
-      <!-- <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"></video> -->
       <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" data-setup="{}" height="100%" poster="" preload="auto" style="height: 100% !important; width: 100% !important;" width="100%" controls>
           <source src="" type="application/x-mpegURL"/>
+          <track srclang="" label="" kind="" src="">
       </video>
   </div>
 
@@ -182,13 +76,55 @@ this.$('video[name="' + sGUID + '"] source').attr('src',sVidUrl);
 var daPoster = qs("poster");
 this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
 
+//CAPTIONS SPLITTING
 var sCap = qs("captions");
 var sKind = qs("kind");
-var daScrubber = qs("scrubber");
+this.$('video[name="' + sGUID + '"] track').attr('kind', sKind);
+var arrayCap = sCap.split(",");
+var sCaplabel = arrayCap[0];
+this.$('video[name="' + sGUID + '"] track').attr('label', sCaplabel);
+var sCaplang = arrayCap[1];
+this.$('video[name="' + sGUID + '"] track').attr('srclang', sCaplang);
+var sCapsrc = arrayCap[2];
+this.$('video[name="' + sGUID + '"] track').attr('src', sCapsrc);
 var daCaponoff = qs("caponoff");
-var daAutoplay = qs("autoplay") == "true" ? true : false;
-var daControls = qs("controls") == "true" ? true : false;
-var daFullscreen = qs("fullscreen") == "true" ? true : false;
+if(daCaponoff === "true" ){
+  //do nothing
+} else {
+  this.$('video[name="' + sGUID + '"] track').prop("default","true");
+}
+//CONTROLS ON/OFF
+var daControls = qs("controls"); //== "true" ? true : false;
+if(daControls === "false" ){
+    this.$(".embed-container").addClass("nocontrols");
+    console.log("API.Video has no controls");
+} else {
+  //do nothing
+}
+//SCRUBBER ON/OFF
+var daScrubber = qs("scrubber");
+if(daScrubber === "no-scrubber"){
+    this.$(".embed-container").addClass("noscrubber");
+    console.log("API.Video has no scrubber");
+} else{
+  //do nothing
+}
+//AUTOPLAY ON/OFF
+var daAutoplay = qs("autoplay"); //== "true" ? true : false;
+if(daAutoplay === "true" ){
+    this.$('video[name="' + sGUID + '"]').prop("autoplay","true");
+    console.log("API.Video autoplay turned on");
+} else {
+  //do nothing
+}
+//FULLSCREEN ON/OFF
+var daFullscreen = qs("fullscreen"); //== "true" ? true : false;
+if(daFullscreen === "false" ){
+    this.$(".embed-container").addClass("nofullmode");
+    console.log("API.Video has no fullscreen mode");
+} else{
+  //do nothing
+}
 
 /* ON PLAY TRIGGER */
 document.getElementById('azuremediaplayer').addEventListener('play',startPlayer,false);
@@ -203,152 +139,6 @@ function myPlayer(e) {
     console.log("Video has ended!");
     $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
 };
-    
-/*if(sCap === null || sCap === undefined || sCap === "" ){
-  
-  /* var myOptions = {
-    "nativeControlsForTouch": false,
-    controls: daControls,
-    autoplay: daAutoplay,
-    width: "100%",
-    height: "100%",
-    poster: "../"+ daPoster,
-    logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
-  }
-  myPlayer = amp("azuremediaplayer", myOptions);
-  myPlayer.src([
-          {
-                  "src": sVidUrl,
-                  "type": "application/vnd.ms-sstr+xml"
-          }
-  ]);
-  myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
-  });
-  myPlayer.addEventListener(amp.eventName.ended, function(){
-    console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
-  });
-  myPlayer.addEventListener(amp.eventName.pause, function(){
-    console.log("Video has been paused! " + window.name );
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
-  });
-  if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
-  }
-
-} else {
-
-  var RevsCap = sCap.replace('english,en,', '').replace('english,fr,', '').replace('english,es,', '').replace('english,it,', '').replace('french,fr,', '').replace('french,en,', '').replace('french,es,', '').replace('french,it,', '').replace('spanish,es,', '').replace('spanish,en,', '').replace('spanish,fr,', '').replace('spanish,it,', '').replace('italian,it,', '').replace('italian,en,', '').replace('italian,fr,', '').replace('italian,es,', '');
-  var myOptions = {
-    "nativeControlsForTouch": false,
-    controls: daControls,
-    autoplay: daAutoplay,
-    width: "100%",
-    height: "100%",
-    poster: "../"+ daPoster,
-    logo: { "enabled": false },
-    hotKeys: { "enableFullscreen": false, "enableNumbers": false, "enableJogStyle": false, "enableMute": true, "enableVolumeScroll": false, "seekStep": 0, "volumeStep": 5 },
-    "language": "en",
-  }
-  myPlayer = amp("azuremediaplayer", myOptions);
-  myPlayer.src([
-          {
-                  "src": sVidUrl,
-                  "type": "application/vnd.ms-sstr+xml"
-          }
-  ],
-  [
-          {
-                  "src": RevsCap,
-                  "srclang": "en",
-                  "label": "english",
-                  "kind": sKind
-          }
-  ]);
-
-  var setTrack = function (language, kind) {
-          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
-              if (myPlayer.textTracks_.tracks_[i].mode != "disabled") {
-                  myPlayer.textTracks_.tracks_[i].mode = "disabled";
-              }
-          }
-          for (var i = 0; i < myPlayer.textTracks_.length ; i++) {
-              if (myPlayer.textTracks_.tracks_[i].language == language && myPlayer.textTracks_.tracks_[i].kind == kind) {
-                  myPlayer.textTracks_.tracks_[i].mode = "showing";
-                  break;
-              }
-          }
-      }
-  myPlayer.addEventListener(amp.eventName.loadedmetadata, function(){
-    setTrack("en", sKind);
-  });
-  myPlayer.addEventListener(amp.eventName.play, function(){
-    console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-ended').addClass('vjs-has-started').addClass('vjs-playing');
-  });
-  myPlayer.addEventListener(amp.eventName.ended, function(){
-    console.log("Video has ended!");
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
-  });
-  myPlayer.addEventListener(amp.eventName.pause, function(){
-    console.log("Video has been paused! " + window.name );
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-playing').addClass('vjs-paused');
-  });
-  if(daFullscreen == false){
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&captions=english,en,' + RevsCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).contents().find(".amp-default-skin").addClass('nofullscreen');
-  }
-
-} */
-
-/* if(daScrubber === "no-scrubber"){
-    this.$(".embed-container").addClass("noscrubber");
-    console.log("Azure has no scrubber");
-} else{
-  //do nothing
-} */
-
-/* if(daCaponoff === "true"){
-    $('.amp-default-skin .vjs-text-track-display').hide();
-    $('head').append('<style type="text/css">.amp-default-skin .vjs-controls-enabled .vjs-big-play-button {width: 100% !important; height: 100% !important; background-color: transparent !important; border: none !important;}.amp-default-skin .vjs-controls-enabled .vjs-big-play-button:after {content: "";display: block;width: calc(.1em);height: calc(.1em); background-color: #3c454f; background-color: rgba(60,69,79,.7); border: 2px solid #384049; border-radius: 0; box-shadow: 0 0 1em rgba(255,255,255,.25); margin: 0px calc(50% - 0.05em);}</style>');
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-closedcaption-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="Captions Off"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-closedcaption-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="sous-titrage désactivé"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-closedcaption-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="subtítulos desactivados"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-closedcaption-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="disattiva didascalie"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-subtitles-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="Subtitles Off"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-subtitles-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="sous-titres désactivés"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-subtitles-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="subtítulos desactivados"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-    this.$('.amp-default-skin .vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .vjs-big-play-button').click(function() {
-      $('.vjs-player:not(.vjs-has-started):not(.vjs-playing):not(.vjs-ended) .amp-subtitles-control .vjs-menu-item:not(.vjs-texttrack-settings)[aria-label="disattiva sottotitoli"]').trigger( "click" );
-      $('.amp-default-skin .vjs-text-track-display').show();
-    });
-} else{
-  console.log("Azure has captions turned on by default");
-}
-*/
 </script>
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 <script>
