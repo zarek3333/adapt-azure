@@ -19,8 +19,8 @@ define([
         },
         events: function() {
             return Adapt.device.touch == true ? {
-                'inview': 'onEnded',
-                'inview': 'trackplayAMP',
+                'touchmove': 'onEnded',
+                'touchmove': 'trackplayAMP',
                 'click .js-azure-inline-transcript-toggle': 'onToggleInlineTranscript',
                 'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
