@@ -5,11 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>VUBIZ Media Player Embed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Azure Media Player 2.3.11 BUILT IN CC & SUBTITLES -->
-    <!-- <link href="//amp.azure.net/libs/amp/2.3.11/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
-    <script src="//amp.azure.net/libs/amp/2.3.11/azuremediaplayer.min.js"></script> -->
     <link href="//vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <script src="../libraries/jquery.min.js"></script>
+    <script src="../libraries/jquery.mobile.custom.min.js"></script>
     <script>
       function qs(key) {
         key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
@@ -73,7 +71,6 @@ this.$("video.azuremediaplayer").attr('name', window.name);
 var sVidUrl = qs("url");
 var sGUID = window.name;
 this.$('video[name="' + sGUID + '"] source').attr('src',sVidUrl);
-
 var daPoster = qs("poster");
 this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
 
@@ -128,25 +125,45 @@ if(daFullscreen === "false" ){
 }
 
 /* ON PLAY TRIGGER */
-document.getElementById('azuremediaplayer').addEventListener('play',startPlayer,false);
-function startPlayer(e) {
-    console.log("Video has started! " + window.name);
+const video = document.querySelector('[name="' + window.name + '"]');
+video.addEventListener("play", (event) => {
+  console.log("Video has started! " + window.name);
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started');
-};
+});
 
 /* ON ENDED TRIGGER */
-document.getElementById('azuremediaplayer').addEventListener('ended',myPlayer,false);
-function myPlayer(e) {
-    console.log("Video has ended!");
+const video2 = document.querySelector('[name="' + window.name + '"]');
+video2.addEventListener("ended", (event) => {
+  console.log("Video has ended! " + window.name);
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
-};
+});
+
+/* MOBILE TRIGGERS ON PLAY OR ENDED */
+var ts;
+$(document).bind('touchstart', function(e) {
+    ts = e.originalEvent.touches[0].clientY;
+    if ($('.azuremediaplayer[name="' + window.name + '"]').hasClass('vjs-touch-enabled')) {
+        console.log("MOBILE Video has started! " + window.name);
+        $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started');
+    }
+});
+
+$(document).bind('touchmove', function(e) {
+    var te = e.originalEvent.changedTouches[0].clientY;
+    if (ts > te) {
+        /* TOUCH DOWN */
+        if ($('.azuremediaplayer.vjs-touch-enabled[name="' + window.name + '"]:not(.apinoended)').hasClass('vjs-ended')) {
+            $('.azuremediaplayer.vjs-touch-enabled.vjs-ended[name="' + window.name + '"]').addClass('apinoended');
+            $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+        }
+    } else {
+        /* TOUCH UP */
+    }
+});
 </script>
-<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script src="//vjs.zencdn.net/8.10.0/video.min.js"></script>
 <script>
     var player = videojs('azuremediaplayer');
-</script>
-<script type="text/javascript">
-  document.getElementsByClassName("vjs-big-play-button[0]).addEventListener('click', () => { appInsights.trackEvent('homeVideo'); }");
 </script>
 </body>
 </html>
