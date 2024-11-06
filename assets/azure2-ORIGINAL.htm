@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>VUBIZ Media Player Embed</title>
-    <!-- Include HLS.js for HLS compatibility in browsers like Chrome and Firefox -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <script src="../libraries/jquery.min.js"></script>
     <script src="../libraries/jquery.mobile.custom.min.js"></script>
     <script>
@@ -53,142 +54,77 @@
             .azure-component.component-full .azure-widget .vjs-default-skin {width: 924px !important; height: 520px !important; text-align: center; display: inline-block; position: relative; margin-bottom: -36.25%;}
             .azure-component.component-full .embed-container {padding-bottom: 36.25%;}
         }
-        .nofullmode video::-webkit-media-controls-fullscreen-button, .noscrubber video::-webkit-media-controls-fullscreen-button, .nocontrols video::-webkit-media-controls-fullscreen-button {display: none;}
-        .noscrubber video::-webkit-media-controls-timeline, .nocontrols video::-webkit-media-controls-timeline {display: none;}
-        .noscrubber video::-webkit-media-controls-current-time-display, .nocontrols video::-webkit-media-controls-current-time-display {display: none;}
-        .noscrubber video::-webkit-media-controls-time-remaining-display, .nocontrols video::-webkit-media-controls-time-remaining-display {display: none;}
-        .nocontrols video::-webkit-media-controls-mute-button {display: none;}
-        .nocontrols video::-webkit-media-controls-toggle-closed-captions-button {display: none;}
-        .nocontrols video::-webkit-media-controls-volume-slider {display: none;}
-        .embed-container.nocontrols:before {
-            content: "";
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            cursor: pointer;
-            left: 0;
-            top: 0;
-            z-index: 1;
-            background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOC4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNjEyIDc5MiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjEyIDc5MiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMzA2LjIsNDU2LjJjMzMuMSwwLDYwLTI2LjgsNjAtNTkuOWMwLTMzLTI2LjctNTkuOS01OS42LTYwLjFjLTMzLjYtMC4yLTYxLDI3LjItNjAuNSw2MQ0KCQlDMjQ2LjcsNDI5LjgsMjczLjQsNDU2LjMsMzA2LjIsNDU2LjJ6Ii8+DQoJPHBhdGggZD0iTTMwNi4yLDQ1Ni4yYy0zMi44LDAtNTkuNS0yNi40LTYwLTU5Yy0wLjUtMzMuOCwyNi45LTYxLjIsNjAuNS02MWMzMi44LDAuMiw1OS42LDI3LjEsNTkuNiw2MC4xDQoJCUMzNjYuMiw0MjkuNCwzMzkuMyw0NTYuMywzMDYuMiw0NTYuMnogTTI4NS4xLDM5Ni4xYzAsMi43LDAsNS40LDAsOC4yYzAsNi42LDAsMTMuMywwLDE5LjljMCwyLDAuOCwzLjUsMi41LDQuNQ0KCQljMS43LDEsMy40LDAuOCw1LjEtMC4zYzMuMS0xLjksNi4yLTMuNyw5LjMtNS41YzEyLjUtNy40LDI1LTE0LjcsMzcuNS0yMi4xYzIuMi0xLjMsMy4xLTMuMSwyLjgtNS40Yy0wLjMtMS44LTEuNC0yLjktMi45LTMuOA0KCQljLTE1LjUtOS4xLTMxLTE4LjMtNDYuNC0yNy40Yy0xLjgtMS0zLjUtMS40LTUuMy0wLjRjLTEuOSwxLTIuNSwyLjctMi41LDQuOEMyODUuMSwzNzcuOCwyODUuMSwzODcsMjg1LjEsMzk2LjF6Ii8+DQoJPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTI4NS4xLDM5Ni4xYzAtOS4yLDAtMTguMywwLTI3LjVjMC0yLjEsMC43LTMuOCwyLjUtNC44YzEuOC0xLDMuNS0wLjcsNS4zLDAuNGMxNS41LDkuMiwzMSwxOC4zLDQ2LjQsMjcuNA0KCQljMS41LDAuOSwyLjYsMiwyLjksMy44YzAuNCwyLjMtMC42LDQuMS0yLjgsNS40Yy0xMi41LDcuNC0yNSwxNC43LTM3LjUsMjIuMWMtMy4xLDEuOC02LjIsMy42LTkuMyw1LjVjLTEuNywxLTMuNCwxLjItNS4xLDAuMw0KCQljLTEuNy0xLTIuNS0yLjUtMi41LTQuNWMwLTYuNiwwLTEzLjMsMC0xOS45QzI4NS4xLDQwMS42LDI4NS4xLDM5OC44LDI4NS4xLDM5Ni4xeiIvPg0KPC9nPg0KPC9zdmc+DQo=');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            opacity: 0.7;
-        }
-        .embed-container.nocontrols:hover:before {
-            opacity: 0.9;
-        }
-        .embed-container.nocontrols.hlsPlay:before {
-            content: "";
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            cursor: pointer;
-            left: 0;
-            top: 0;
-            z-index: 1;
-            background: transparent;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            opacity: 0;
-        }
-        .embed-container.nocontrols.hlsPlay:hover:before {opacity: 0;}
     </style>
 </head>
 <body style="overflow: hidden; margin: 0px;">
-    <div class="embed-container" id="video-container">
+<div class='embed-container'>
 
-      <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" preload="auto" height="100%" width="100%" poster="" style="height: 100% !important; width: 100% !important;" playsInline webkit-playsInline controls controlsList="nodownload noplaybackrate">
+      <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" data-setup="{}" height="100%" poster="" preload="auto" style="height: 100% !important; width: 100% !important;" width="100%" controls>
           <source src="" type="application/x-mpegURL"/>
           <!-- <track srclang="" label="" kind="" src=""> -->
       </video>
-      
-    </div>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  </div>
+
 <script>
-//Pushing component variables into iFrame
 this.$("video.azuremediaplayer").attr('name', window.name);
-const sVidUrl = qs("url");
-const sGUID = window.name;
-const justID = sGUID.replace('azuremediaplayer-','');
-const daPoster = qs("poster");
+var sVidUrl = qs("url");
+var sGUID = window.name;
+var justID = sGUID.replace('azuremediaplayer-','');
+this.$('video[name="' + sGUID + '"] source').attr('src',sVidUrl);
+var daPoster = qs("poster");
 this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
 
-
-
 //CAPTIONS SPLITTING
-const sCap = qs("captions");
-const sKind = qs("kind");
-const daCaponoff = qs("caponoff");
+var sCap = qs("captions");
+var sKind = qs("kind");
+/* this.$('video[name="' + sGUID + '"] track').attr('kind', sKind);
+var arrayCap = sCap.split(",");
+var sCaplabel = arrayCap[0];
+this.$('video[name="' + sGUID + '"] track').attr('label', sCaplabel);
+var sCaplang = arrayCap[1];
+this.$('video[name="' + sGUID + '"] track').attr('srclang', sCaplang);
+var sCapsrc = arrayCap[2];
+this.$('video[name="' + sGUID + '"] track').attr('src', sCapsrc);
+*/
+var daCaponoff = qs("caponoff");
+/*if(daCaponoff === "true" ){
+  //do nothing
+} else {
+  this.$('video[name="' + sGUID + '"] track').prop("default","true");
+} */
 
 //CONTROLS ON/OFF
-const daControls = qs("controls"); //== "true" ? true : false;
+var daControls = qs("controls"); //== "true" ? true : false;
 if(daControls === "false" ){
     this.$(".embed-container").addClass("nocontrols");
-    this.$('video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
     console.log("API.Video has no controls");
 } else {
   //do nothing
 }
-
 //SCRUBBER ON/OFF
-const daScrubber = qs("scrubber");
+var daScrubber = qs("scrubber");
 if(daScrubber === "no-scrubber"){
     this.$(".embed-container").addClass("noscrubber");
     console.log("API.Video has no scrubber");
 } else{
   //do nothing
 }
-
 //AUTOPLAY ON/OFF
-const daAutoplay = qs("autoplay"); //== "true" ? true : false;
+var daAutoplay = qs("autoplay"); //== "true" ? true : false;
 if(daAutoplay === "true" ){
     this.$('video[name="' + sGUID + '"]').prop("autoplay","true");
     console.log("API.Video autoplay turned on");
 } else {
   //do nothing
 }
-
 //FULLSCREEN ON/OFF
-const daFullscreen = qs("fullscreen"); //== "true" ? true : false;
+var daFullscreen = qs("fullscreen"); //== "true" ? true : false;
 if(daFullscreen === "false" ){
     this.$(".embed-container").addClass("nofullmode");
-    this.$('video[name="' + sGUID + '"]').attr("controlsList","nodownload noplaybackrate nofullscreen");
     console.log("API.Video has no fullscreen mode");
 } else{
   //do nothing
 }
-
-// Initialize player with HLS.js
-document.addEventListener("DOMContentLoaded", function() {
-    const video = document.getElementById('azuremediaplayer');
-    const videoSrc = sVidUrl;
-    video.disablePictureInPicture = true;
-    video.playsinline = true;
-
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(video);
-    } else if (video.canPlayType('application/x-mpegURL')) {
-        video.src = videoSrc; // Native HLS support for Safari
-    }
-
-});
-
-//BIG PLAY BUTTON SET TO NO CONTROLS
-$(".embed-container.nocontrols").on( "click", function() {
-    $('video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
-    video.paused ? video.play() : video.pause();
-    arguments[0].preventDefault();
-});
 
 /* ON PLAY TRIGGER */
 const video = document.querySelector('[name="' + window.name + '"]');
@@ -235,9 +171,10 @@ $(document).bind('touchmove', function(e) {
         /* TOUCH UP */
     }
 });
-
-
 </script>
-
+<script src="//vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script>
+    var player = videojs('azuremediaplayer');
+</script>
 </body>
 </html>
