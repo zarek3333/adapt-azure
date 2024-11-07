@@ -131,7 +131,7 @@ const daCaponoff = qs("caponoff");
 //CONTROLS ON/OFF
 const daControls = qs("controls"); //== "true" ? true : false;
 if(daControls === "false" ){
-    this.$(".embed-container").addClass("nocontrols");
+    this.$(".embed-container").attr("tabindex","0").addClass("nocontrols");
     this.$('video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
     console.log("API.Video has no controls");
 } else {
@@ -189,6 +189,16 @@ $(".embed-container.nocontrols").on( "click", function() {
     video.paused ? video.play() : video.pause();
     arguments[0].preventDefault();
 });
+//ENTER KEY PRESS 
+$(".embed-container.nocontrols").bind('keypress', function(e) {
+    var code = e.keyCode || e.which;
+    if(code == 13) {
+        $('video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
+        video.paused ? video.play() : video.pause();
+        arguments[0].preventDefault();
+        return false;  
+    }
+}); 
 
 /* ON PLAY TRIGGER */
 const video = document.querySelector('[name="' + window.name + '"]');
