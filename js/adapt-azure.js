@@ -44,7 +44,28 @@ define([
                     Adapt.trigger('azureAPIReady');
                 };
                 $.getScript('assets/www-widgetapi.js');
-            } 
+            }
+
+            //FIREFOX CLOSED CAPTIONS SWITCH OF PLAYER
+            _.delay(function() {
+                const hlsSrc = this.model.get('_media')._source;
+                const hlsCapLabel = this.model.get('_media')._caplabel;
+                const hlsSrcLabel = this.model.get('_media')._srclang;
+                const hlsCaptions = this.model.get('_media')._captions;
+                const hlsCapkind = this.model.get('_media')._capkind;
+                const hlsAutoplay = this.model.get('_media')._autoplay;
+                const hlsFullscreen = this.model.get('_media')._setFullscreen;
+                const hlsControls = this.model.get('_media')._controls;
+                const hlsPoster = this.model.get('_media')._poster;
+                const hlsScrubber = this.model.get('_media')._scrubber;
+                const hlsCaptiononauto = this.model.get('_media')._captiononauto;
+
+                if (navigator.userAgent.search("Firefox") >= 0) {
+                    $('iframe[src*="assets/azure.htm"]').addClass("hlsfirefox").attr("src","assets/azure-ORIGINAL.htm?url=//" + hlsSrc + "&captions=" + hlsCapLabel + "," + hlsSrcLabel + ",//" + hlsCaptions + "&kind=" + hlsCapkind + "&autoplay=" + hlsAutoplay + "&fullscreen=" + hlsFullscreen + "&controls=" + hlsControls + "&poster=" + hlsPoster + "&scrubber=" + hlsScrubber + "&caponoff=" + hlsCaptiononauto);
+                } else {
+                    //do nothing
+                }
+            }.bind(this), 555);
         },
 
         preRender: function() {
