@@ -38,13 +38,13 @@ define([
 
             _.bindAll(this, 'onInview', 'onPlay', 'onEnded' );
 
-            if (window.onAzureIframeAPIReady === undefined) {
+            /*if (window.onAzureIframeAPIReady === undefined) {
                 window.onAzureIframeAPIReady = function() {
                     Adapt.azureAPIReady = true;
                     Adapt.trigger('azureAPIReady');
                 };
                 $.getScript('assets/www-widgetapi.js');
-            }
+            }*/
 
             //FIREFOX CLOSED CAPTIONS SWITCH OF PLAYER
             _.delay(function() {
@@ -86,12 +86,11 @@ define([
         },
 
         postRender: function() {
-
-            if (Adapt.azureAPIReady === true) {
+            //if (Adapt.azureAPIReady === true) {
                 this.onAzureIframeAPIReady();
-            } else {
+            /*} else {
                 Adapt.once('azureAPIReady', this.onAzureIframeAPIReady, this)
-            }
+            }*/
         },
 
         remove: function() {
