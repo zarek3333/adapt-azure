@@ -75,6 +75,12 @@ define([
         },
 
         setIFrameSize: function () {
+            //IF MOBILE ADD THE CLASS
+            if ($('html').hasClass('touch')) {
+                $('iframe').addClass("vjs-touch-enabled");
+            } else {
+                //DO NOTHING
+            }
             this.$('.azuremediaplayer').width(this.$('.azure__widget').width());
             this.$('iframe').width(this.$('.azure__widget').width());
             
