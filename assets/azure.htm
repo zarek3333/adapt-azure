@@ -212,7 +212,7 @@ $(".embed-container.nocontrols").bind('keypress', function(e) {
 }); 
 
 /* ON PLAY TRIGGER */
-const video = document.querySelector('[name="' + window.name + '"]');
+const video = document.querySelector('[name="' + window.name + '"]:not(".vjs-touch-enabled")');
 video.addEventListener("play", (event) => {
   console.log("Video has started! " + window.name);
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started').addClass('vjs-playing');
@@ -220,14 +220,14 @@ video.addEventListener("play", (event) => {
 });
 
 /* ON PAUSE TRIGGER */
-const video1 = document.querySelector('[name="' + window.name + '"]');
+const video1 = document.querySelector('[name="' + window.name + '"]:not(".vjs-touch-enabled")');
 video1.addEventListener("pause", (event) => {
   console.log("Video has paused! " + window.name);
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-paused');
 });
 
 /* ON ENDED TRIGGER */
-const video2 = document.querySelector('[name="' + window.name + '"]');
+const video2 = document.querySelector('[name="' + window.name + '"]:not(".vjs-touch-enabled")');
 video2.addEventListener("ended", (event) => {
   console.log("Video has ended! " + window.name);
     $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
@@ -235,26 +235,23 @@ video2.addEventListener("ended", (event) => {
 
 /* MOBILE TRIGGERS ON PLAY OR ENDED */
 var ts;
-$(document).bind('touchstart', function(e) {
+const iFrameDOM = document.querySelector('[name="' + window.name + '"]');
+$(iFrameDOM).bind('touchstart', function(e) {
     ts = e.originalEvent.touches[0].clientY;
-    if ($('.azuremediaplayer[name="' + window.name + '"]').hasClass('vjs-touch-enabled')) {
-        console.log("MOBILE Video has started! " + window.name);
-        $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started').addClass('vjs-playing');
+    iFrameDOM.addEventListener("play", (event) => {
+      console.log("MOBILE Video has started! " + window.name);
+      $('#wrapper iframe.vjs-touch-enabled[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started').addClass('vjs-playing');
         $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-pause:not(.audio-play)', window.parent.document).trigger("click");
-    }
+    });
 });
-
-$(document).bind('touchmove', function(e) {
-    var te = e.originalEvent.changedTouches[0].clientY;
-    if (ts > te) {
-        /* TOUCH DOWN */
-        if ($('.azuremediaplayer.vjs-touch-enabled[name="' + window.name + '"]:not(.apinoended)').hasClass('vjs-ended')) {
-            $('.azuremediaplayer.vjs-touch-enabled.vjs-ended[name="' + window.name + '"]').addClass('apinoended');
-            $('#wrapper iframe[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
-        }
-    } else {
-        /* TOUCH UP */
-    }
+const iFrameDOM2 = document.querySelector('[name="' + window.name + '"]');
+var te;
+$(iFrameDOM2).bind('touchend', function(e) {
+    te = e.originalEvent.changedTouches[0].clientY;
+    iFrameDOM2.addEventListener("ended", (event) => {
+      console.log("MOBILE Video has ended! " + window.name);
+      $('#wrapper iframe.vjs-touch-enabled[src="assets/azure.htm?url=' + sVidUrl + '&captions=' + sCap + '&kind=' + sKind + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+    });
 });
 
 
