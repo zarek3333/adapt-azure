@@ -2,7 +2,7 @@
     "name": "adapt-azure",
     "repository": "git://github.com/mike-st/adapt-azure.git",
     "framework": ">=5.0.0",
-    "version": "5.5.7",
+    "version": "5.5.8",
     "homepage": "https://github.com/mike-st/adapt-azure",
     "displayName": "API.Video Player",
     "component": "azure",
