@@ -37,6 +37,10 @@ define([
             ComponentView.prototype.initialize.apply(this);
 
             _.bindAll(this, 'onInview', 'onPlay', 'onEnded' );
+            Adapt.on("azureVideoComplete", () => {
+                console.log("[Azure] Received completion signal from iframe.");
+                this.setCompletionStatus();  // This marks the video complete reliably
+            });
 
             /*if (window.onAzureIframeAPIReady === undefined) {
                 window.onAzureIframeAPIReady = function() {
@@ -77,7 +81,7 @@ define([
         setIFrameSize: function () {
             //IF MOBILE ADD THE CLASS
             if ($('html').hasClass('touch')) {
-                $('iframe').addClass("vjs-touch-enabled");
+                $("iframe").addClass("vjs-touch-enabled");
             } else {
                 //DO NOTHING
             }
