@@ -181,6 +181,16 @@ document.addEventListener("DOMContentLoaded", function() {
         video.src = videoSrc; // Native HLS support for Safari
     }
 
+    // Add this inside the same block:
+    video.addEventListener("ended", (event) => {
+        console.log("[Azure] Video has ended in iframe: " + window.name);
+        if (parent && parent.Adapt) {
+            parent.Adapt.trigger("azureVideoComplete", window.name);
+        } else {
+            console.warn("[Azure] parent.Adapt not available on ended");
+        }
+    });
+
 });
 
 //BIG PLAY BUTTON SET TO NO CONTROLS
@@ -221,6 +231,11 @@ video2.addEventListener("ended", (event) => {
   console.log("Video has ended! " + window.name);
     $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
     $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-play:not(.audio-pause)', window.parent.document).trigger("click");
+    
+    // Send completion signal to Adapt parent (inside LMS or SCORM)
+    if (parent && parent.Adapt) {
+        parent.Adapt.trigger("azureVideoComplete", window.name);
+    }
 });
 
 /* MOBILE TRIGGERS ON PLAY OR ENDED */
@@ -233,6 +248,16 @@ $(iFrameDOM).bind('touchstart', function(e) {
       $('#wrapper iframe.vjs-touch-enabled[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started').addClass('vjs-playing');
       $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-pause:not(.audio-play)', window.parent.document).trigger("click");
     });
+    if ($('#wrapper iframe', window.parent.document).hasClass('vjs-touch-enabled') ){
+        $(".embed-container.noscrubber").attr("tabindex","0").addClass("nocontrols");
+        $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
+        //BIG PLAY BUTTON SET TO NO CONTROLS
+        $(".embed-container.noscrubber.nocontrols").on( "click", function() {
+            $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
+            video.paused ? video.play() : video.pause();
+            arguments[0].preventDefault();
+        });
+    }
 });
 const iFrameDOM2 = document.querySelector('[name="' + window.name + '"]');
 var te;
@@ -241,6 +266,12 @@ $(iFrameDOM2).bind('touchend', function(e) {
     iFrameDOM2.addEventListener("ended", (event) => {
       console.log("MOBILE Video has ended! " + window.name);
       $('#wrapper iframe.vjs-touch-enabled[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
+      $(".embed-container.noscrubber.nocontrols").removeClass( "hlsPlay" );
+
+      // Send completion signal to Adapt parent (inside LMS or SCORM)
+      if (parent && parent.Adapt) {
+        parent.Adapt.trigger("azureVideoComplete", window.name);
+      }
     });
 });
 
