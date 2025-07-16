@@ -39,8 +39,10 @@ define([
             _.bindAll(this, 'onInview', 'onPlay', 'onEnded' );
             Adapt.on("azureVideoComplete", () => {
                 console.log("[Azure] Received completion signal from iframe.");
-                this.setCompletionStatus();  // This marks the video complete reliably
+                this.setCompletionStatus();  // ⬅️ This marks the video complete reliably
             });
+
+
 
             /*if (window.onAzureIframeAPIReady === undefined) {
                 window.onAzureIframeAPIReady = function() {
@@ -81,7 +83,7 @@ define([
         setIFrameSize: function () {
             //IF MOBILE ADD THE CLASS
             if ($('html').hasClass('touch')) {
-                $("iframe").addClass("vjs-touch-enabled");
+                $('iframe').addClass("vjs-touch-enabled");
             } else {
                 //DO NOTHING
             }
@@ -149,6 +151,9 @@ define([
                     }
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
+                        $('iframe[src*="assets/azure"]').contents().find('.nocontrols').addClass("accessibility");
+                    } else {
+                        $('iframe[src*="assets/azure"]').contents().find('.nocontrols').removeClass("accessibility");
                     }
                 }
             }
@@ -172,6 +177,9 @@ define([
                     $(checkForChanges1);
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
+                        $('iframe[src*="assets/azure"]').contents().find('.nocontrols').addClass("accessibility");
+                    } else {
+                        $('iframe[src*="assets/azure"]').contents().find('.nocontrols').removeClass("accessibility");
                     }
                 }
                 var self = this;
@@ -204,6 +212,9 @@ define([
                     $(checkForChanges2);
                     if ( $('html').hasClass('accessibility') ) {
                         $(".js-skip-to-transcript").attr("tabindex", "0").attr("aria-label", "Skip to Transcript").text("Skip to Transcript");
+                        $('iframe[src*="assets/azure"]').contents().find('.nocontrols').addClass("accessibility");
+                    } else {
+                        $('iframe[src*="assets/azure"]').contents().find('.nocontrols').removeClass("accessibility");
                     }
                 }
             }
