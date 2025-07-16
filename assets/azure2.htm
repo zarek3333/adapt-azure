@@ -7,13 +7,7 @@
     <!-- Include HLS.js for HLS compatibility in browsers like Chrome and Firefox -->
     <script src="../libraries/jquery.min.js"></script>
     <script src="../libraries/jquery.mobile.custom.min.js"></script>
-    <script>
-      function qs(key) {
-        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
-        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-      }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         html, body {
             height: 100%;
@@ -100,10 +94,24 @@
             opacity: 0;
         }
         .embed-container.nocontrols.hlsPlay:hover:before {opacity: 0;}
+        .embed-container.nocontrols.accessibility:focus:after {
+          content: "Press Enter to Play or Pause";
+          width: 100%;
+          height: 20px;
+          background-color: black;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 0px;
+          padding: 5px 0px;
+          position: absolute;
+      }
+
     </style>
 </head>
 <body style="overflow: hidden; margin: 0px;">
-    <div class="embed-container" id="video-container">
+    <div class="embed-container" id="video-container" tabindex="0">
 
       <video id="azuremediaplayer" class="video-js video-js vjs-fluid vjs-default-skin azuremediaplayer" preload="auto" height="100%" width="100%" poster="" style="height: 100% !important; width: 100% !important;" playsInline webkit-playsInline controls controlsList="nodownload noplaybackrate">
           <source src="" type="application/x-mpegURL"/>
@@ -111,172 +119,110 @@
       </video>
       
     </div>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-//Pushing component variables into iFrame
-this.$("video.azuremediaplayer").attr('name', window.name);
-const sVidUrl = qs("url");
-const sGUID = window.name;
-const justID = sGUID.replace('azuremediaplayer-','');
-const daPoster = qs("poster");
-this.$('video[name="' + sGUID + '"]').attr('poster','../' + daPoster);
+    function qs(key) {
+      key = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var match = location.search.match(new RegExp('[?&]' + key + '=([^&]+)(&|$)'));
+      return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
 
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById('azuremediaplayer');
+      const videoSrc = qs("url");
+      const sGUID = window.name;
+      const justID = sGUID.replace('azuremediaplayer-', '');
 
+      video.setAttribute("name", sGUID);
+      video.setAttribute("poster", '../' + qs("poster"));
 
-//CAPTIONS SPLITTING
-const sCap = qs("captions");
-const sKind = qs("kind");
-const daCaponoff = qs("caponoff");
+      // Track setup
+        const sCap = qs("captions");
+        const sKind = qs("kind");
+        const daCaponoff = qs("caponoff");
 
-//CONTROLS ON/OFF
-const daControls = qs("controls"); //== "true" ? true : false;
-if(daControls === "false" ){
-    this.$(".embed-container").attr("tabindex","0").addClass("nocontrols");
-    this.$('video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
-    console.log("API.Video has no controls");
-} else {
-  //do nothing
-}
+      // Controls
+      if (qs("controls") === "false") {
+        $(".embed-container").addClass("nocontrols");
+        video.removeAttribute("controls");
+        video.setAttribute("onclick", "this.paused ? this.play() : this.pause(); event.preventDefault();");
+      }
+      if (qs("scrubber") === "no-scrubber") {
+        $(".embed-container").addClass("noscrubber");
+      }
+      if (qs("autoplay") === "true") {
+        video.setAttribute("autoplay", "true");
+      }
+      if (qs("fullscreen") === "false") {
+        $(".embed-container").addClass("nofullmode");
+        video.setAttribute("controlsList", "nodownload noplaybackrate nofullscreen");
+      }
 
-//SCRUBBER ON/OFF
-const daScrubber = qs("scrubber");
-if(daScrubber === "no-scrubber"){
-    this.$(".embed-container").addClass("noscrubber");
-    console.log("API.Video has no scrubber");
-} else{
-  //do nothing
-}
-
-//AUTOPLAY ON/OFF
-const daAutoplay = qs("autoplay"); //== "true" ? true : false;
-if(daAutoplay === "true" ){
-    this.$('video[name="' + sGUID + '"]').prop("autoplay","true");
-    console.log("API.Video autoplay turned on");
-} else {
-  //do nothing
-}
-
-//FULLSCREEN ON/OFF
-const daFullscreen = qs("fullscreen"); //== "true" ? true : false;
-if(daFullscreen === "false" ){
-    this.$(".embed-container").addClass("nofullmode");
-    this.$('video[name="' + sGUID + '"]').attr("controlsList","nodownload noplaybackrate nofullscreen");
-    console.log("API.Video has no fullscreen mode");
-} else{
-  //do nothing
-}
-
-// Initialize player with HLS.js
-document.addEventListener("DOMContentLoaded", function() {
-    const video = document.getElementById('azuremediaplayer');
-    const videoSrc = sVidUrl;
-    video.disablePictureInPicture = true;
-    video.playsinline = true;
-
-    if (Hls.isSupported()) {
+      // HLS Support
+      if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(videoSrc);
         hls.attachMedia(video);
-    } else if (video.canPlayType('application/x-mpegURL')) {
-        video.src = videoSrc; // Native HLS support for Safari
-    }
-
-    // Add this inside the same block:
-    video.addEventListener("ended", (event) => {
-        console.log("[Azure] Video has ended in iframe: " + window.name);
-        if (parent && parent.Adapt) {
-            parent.Adapt.trigger("azureVideoComplete", window.name);
-        } else {
-            console.warn("[Azure] parent.Adapt not available on ended");
-        }
-    });
-
-});
-
-//BIG PLAY BUTTON SET TO NO CONTROLS
-$(".embed-container.nocontrols").on( "click", function() {
-    $('video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
-    video.paused ? video.play() : video.pause();
-    arguments[0].preventDefault();
-});
-//ENTER KEY PRESS 
-$(".embed-container.nocontrols").bind('keypress', function(e) {
-    var code = e.keyCode || e.which;
-    if(code == 13) {
-        $('video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
-        video.paused ? video.play() : video.pause();
-        arguments[0].preventDefault();
-        return false;  
-    }
-}); 
-
-/* ON PLAY TRIGGER */
-const video = document.querySelector('[name="' + window.name + '"]');
-video.addEventListener("play", (event) => {
-  console.log("Video has started! " + window.name);
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started').addClass('vjs-playing');
-    $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-pause:not(.audio-play)', window.parent.document).trigger("click");
-});
-
-/* ON PAUSE TRIGGER */
-const video1 = document.querySelector('[name="' + window.name + '"]');
-video1.addEventListener("pause", (event) => {
-  console.log("Video has paused! " + window.name);
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-paused');
-});
-
-/* ON ENDED TRIGGER */
-const video2 = document.querySelector('[name="' + window.name + '"]');
-video2.addEventListener("ended", (event) => {
-  console.log("Video has ended! " + window.name);
-    $('#wrapper iframe[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
-    $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-play:not(.audio-pause)', window.parent.document).trigger("click");
-    
-    // Send completion signal to Adapt parent (inside LMS or SCORM)
-    if (parent && parent.Adapt) {
-        parent.Adapt.trigger("azureVideoComplete", window.name);
-    }
-});
-
-/* MOBILE TRIGGERS ON PLAY OR ENDED */
-var ts;
-const iFrameDOM = document.querySelector('[name="' + window.name + '"]');
-$(iFrameDOM).bind('touchstart', function(e) {
-    ts = e.originalEvent.touches[0].clientY;
-    iFrameDOM.addEventListener("play", (event) => {
-      console.log("MOBILE Video has started! " + window.name);
-      $('#wrapper iframe.vjs-touch-enabled[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-has-started').addClass('vjs-playing');
-      $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-pause:not(.audio-play)', window.parent.document).trigger("click");
-    });
-    if ($('#wrapper iframe', window.parent.document).hasClass('vjs-touch-enabled') ){
-        $(".embed-container.noscrubber").attr("tabindex","0").addClass("nocontrols");
-        $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
-        //BIG PLAY BUTTON SET TO NO CONTROLS
-        $(".embed-container.noscrubber.nocontrols").on( "click", function() {
-            $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
-            video.paused ? video.play() : video.pause();
-            arguments[0].preventDefault();
-        });
-    }
-});
-const iFrameDOM2 = document.querySelector('[name="' + window.name + '"]');
-var te;
-$(iFrameDOM2).bind('touchend', function(e) {
-    te = e.originalEvent.changedTouches[0].clientY;
-    iFrameDOM2.addEventListener("ended", (event) => {
-      console.log("MOBILE Video has ended! " + window.name);
-      $('#wrapper iframe.vjs-touch-enabled[src="assets/azure2.htm?url=' + sVidUrl + '&autoplay=' + daAutoplay + '&fullscreen=' + daFullscreen + '&controls=' + daControls + '&poster=' + daPoster + '&scrubber=' + daScrubber + '&caponoff=' + daCaponoff + '"]', window.parent.document).removeClass('vjs-paused').removeClass('vjs-has-started').removeClass('vjs-playing').addClass('vjs-ended');
-      $(".embed-container.noscrubber.nocontrols").removeClass( "hlsPlay" );
-
-      // Send completion signal to Adapt parent (inside LMS or SCORM)
-      if (parent && parent.Adapt) {
-        parent.Adapt.trigger("azureVideoComplete", window.name);
+      } else if (video.canPlayType('application/x-mpegURL')) {
+        video.src = videoSrc;
       }
+
+      video.disablePictureInPicture = true;
+      video.playsinline = true;
+
+      // Completion logic
+      let completionFired = false;
+      function fireCompletion() {
+        if (!completionFired && parent && parent.Adapt) {
+          parent.Adapt.trigger("azureVideoComplete", window.name);
+          console.log("[Azure] Completion event sent for:", window.name);
+          completionFired = true;
+        }
+      }
+
+      video.addEventListener("ended", fireCompletion);
+      video.addEventListener("pause", () => {
+        if (video.ended) fireCompletion();
+      });
+      video.addEventListener("timeupdate", () => {
+        if (video.duration && video.currentTime >= video.duration - 0.5) {
+          fireCompletion();
+        }
+      });
+
+      // Big play button behavior
+      $(".embed-container.nocontrols").on("click", function (e) {
+        $(this).toggleClass("hlsPlay");
+        video.paused ? video.play() : video.pause();
+        e.preventDefault();
+      });
+      //ENTER KEY PRESS 
+      $(".embed-container.nocontrols").bind('keypress', function(e) {
+          var code = e.keyCode || e.which;
+          if(code == 13) {
+              $('video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
+              video.paused ? video.play() : video.pause();
+              arguments[0].preventDefault();
+              return false;  
+          }
+      });
+      /* MOBILE TRIGGERS ON PLAY OR ENDED */
+        var ts;
+        const iFrameDOM = document.querySelector('[name="' + window.name + '"]');
+        $(iFrameDOM).bind('touchstart', function(e) {
+            ts = e.originalEvent.touches[0].clientY;
+            if ($('#wrapper iframe', window.parent.document).hasClass('vjs-touch-enabled') ){
+                $(".embed-container.noscrubber").attr("tabindex","0").addClass("nocontrols");
+                $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
+                //BIG PLAY BUTTON SET TO NO CONTROLS
+                $(".embed-container.noscrubber.nocontrols").on( "click", function() {
+                    $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
+                    video.paused ? video.play() : video.pause();
+                    arguments[0].preventDefault();
+                });
+            }
+        });
     });
-});
-
-
-</script>
+  </script>
 
 </body>
 </html>
