@@ -206,21 +206,28 @@
           }
       });
       /* MOBILE TRIGGERS ON PLAY OR ENDED */
-        var ts;
-        const iFrameDOM = document.querySelector('[name="' + window.name + '"]');
-        $(iFrameDOM).bind('touchstart', function(e) {
-            ts = e.originalEvent.touches[0].clientY;
-            if ($('#wrapper iframe', window.parent.document).hasClass('vjs-touch-enabled') ){
-                $(".embed-container.noscrubber").attr("tabindex","0").addClass("nocontrols");
-                $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
-                //BIG PLAY BUTTON SET TO NO CONTROLS
-                $(".embed-container.noscrubber.nocontrols").on( "click", function() {
-                    $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
-                    video.paused ? video.play() : video.pause();
-                    arguments[0].preventDefault();
-                });
-            }
-        });
+      var ts;
+      const iFrameDOM = document.querySelector('[name="' + window.name + '"]');
+      $(iFrameDOM).bind('touchstart', function(e) {
+          ts = e.originalEvent.touches[0].clientY;
+          if ($('#wrapper iframe', window.parent.document).hasClass('vjs-touch-enabled') ){
+              $(".embed-container.noscrubber").attr("tabindex","0").addClass("nocontrols");
+              $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').prop("controls","").attr("onclick","this.paused ? this.play() : this.pause(); arguments[0].preventDefault();");
+              //BIG PLAY BUTTON SET TO NO CONTROLS
+              $(".embed-container.noscrubber.nocontrols").on( "click", function() {
+                  $('.embed-container.noscrubber.nocontrols video[name="' + sGUID + '"]').parent().toggleClass( "hlsPlay" );
+                  video.paused ? video.play() : video.pause();
+                  arguments[0].preventDefault();
+              });
+          }
+      });
+      /* ON PLAY TRIGGER */
+      video.addEventListener("play", (event) => {
+        console.log("Video has started! " + window.name);
+          $('#wrapper iframe', window.parent.document).removeClass('vjs-has-started').addClass('vjs-has-started').addClass('vjs-playing');
+          $('.embed-container video[name="' + window.name + '"]').addClass('vjs-playing');
+          $('#wrapper div[data-adapt-id="' + justID + '"] #' + justID + '.audio-toggle.audio-pause:not(.audio-play)', window.parent.document).trigger("click");
+      });
     });
   </script>
 

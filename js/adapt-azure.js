@@ -20,13 +20,11 @@ define([
         events: function() {
             return Adapt.device.touch == true ? {
                 'touchmove': 'onEnded',
-                'touchmove': 'trackplayAMP',
                 'click .js-azure-inline-transcript-toggle': 'onToggleInlineTranscript',
                 'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
             } : {
                 'mousemove': 'onEnded',
-                'mousemove': 'trackplayAMP',
                 'click .azure__transcript-btn-inline': 'onToggleInlineTranscript',
                 'click .js-azure-external-transcript-click': 'onExternalTranscriptClicked',
                 'click .js-skip-to-transcript': 'onSkipToTranscript'
@@ -225,15 +223,6 @@ define([
                 } else {
                     setTimeout(checkForChanges2, 500);
                 }
-            }
-        },
-
-        trackplayAMP: function() {
-            var currentazureon = this.model.get('_id');
-            //Trigger PAUSE button from outside the iframe
-            if ( $('iframe[name="azuremediaplayer-' + currentazureon + '"]').hasClass('vjs-playing') ) {
-                $('div[data-adapt-id="' + currentazureon + '"] .audio-controls .audio-toggle.audio-pause:not(.audio-play)').trigger("click"); //stop current audio
-                $('iframe:not(#' + currentazureon + ').vjs-playing:not(.vjs-paused)').contents().find(".vjs-play-control.vjs-control.vjs-button.vjs-playing:not(.vjs-paused)").trigger("click");
             }
         },
         
